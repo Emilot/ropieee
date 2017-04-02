@@ -1,97 +1,34 @@
 # Maintainer: Harry ten Berge <htenberge@gmail.com>
 
-buildarch=20
-
 pkgbase=ropieee
-_commit=935c7ce84c982a26f567a03a58a1537424569938
-_srcname=linux-${_commit}
-_kernelname=${pkgbase#linux}
-_desc="Raspberry Pi with native DSD support"
-pkgver=4.9.13
-pkgrel=50
-arch=('armv6h' 'armv7h')
+_desc="Ropieee"
+pkgver=2
+pkgrel=1
+arch=('any')
 url="http://www.kernel.org/"
-license=('GPL2')
-makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git')
+license=('MIT')
+#makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git')
 options=('!strip')
-source=("git+https://https://bitbucket.org/htenberge/ropieee#branch=master")
-md5sums=('a062f6bab5ef6f1304db30f617aff460')
+source=("./ropieee.tar.bz2")
+md5sums=('7d3d5c8158b5d2e6e1092eecbd136967')
 
 prepare() {
-  cd "${srcdir}/${_srcname}"
+#  cd "${srcdir}/${_srcname}"
+#
+#  cat "${srcdir}/config" > ./.config
+   echo "prepare"
 
-  cat "${srcdir}/config" > ./.config
-
-  msg2 "patching: eliminate noise at the start of DSD"
-  patch -Np1 -i ../70a8155a64fc3fde57f69f91da3b2835823e0061.patch
-
-  msg2 "patching: kernel native DSD quirks"
-  patch -Np1 -i ../xmos-native-dsd/SRPMS/patches/kernel/0001-usb-native-DSD-support-for-Bryston-BDA3.patch
-  patch -Np1 -i ../xmos-native-dsd/SRPMS/patches/kernel/0001-Add-native-DSD-support-for-W4S-DAC-2-DSD-fixed.patch
-  patch -Np1 -i ../xmos-native-dsd/SRPMS/patches/kernel/0001-Add-native-DSD-support-for-the-Mytek-Brooklyn-DAC.patch
-#  patch -Np1 -i ../xmos-native-dsd/SRPMS/patches/kernel/0001-Add-native-DSD-support-for-Unison-Research-Unico-CD2.patch
-  patch -Np1 -i ../xmos-native-dsd/SRPMS/patches/kernel/0001-usb-native-DSD-support-for-Singxer-F-1.patch
-  patch -Np1 -i ../xmos-native-dsd/SRPMS/patches/kernel/0001-ALSA-USB-Add-native-DSD-support-for-MSB-Technology.patch
-#  patch -Np1 -i ../xmos-native-dsd/SRPMS/patches/kernel/0001-ALSA-USB-Add-native-DSD-support-for-VI-DAC-Inifinity.patch
-#  patch -Np1 -i ../xmos-native-dsd/SRPMS/patches/kernel/0001-Add-native-DSD-support-for-PS-Audio-NuWave-DAC.patch
-#  patch -Np1 -i ../xmos-native-dsd/SRPMS/patches/kernel/0001-Add-native-DSD-support-for-the-NuPrime-DAC-10.patch
-#  patch -Np1 -i ../xmos-native-dsd/SRPMS/patches/kernel/0001-USB-Add-native-DSD-support-for-Holo-Springs-Level-3-.patch
-
-##  patch -Np1 -i ../xmos-native-dsd/SRPMS/patches/kernel/0001-usb-native-DSD-support-for-Wyred4Sound-DAC2v2.patch
-
-  # add pkgrel to extraversion
-  sed -ri "s|^(EXTRAVERSION =)(.*)|\1 \2-${pkgrel}|" Makefile
-
-  # don't run depmod on 'make install'. We'll do this ourselves in packaging
-  sed -i '2iexit 0' scripts/depmod.sh
-
-  mkdir firmware/brcm
-  cp ../brcmfmac43430-sdio.{bin,txt} firmware/brcm
 }
 
 build() {
-  cd "${srcdir}/${_srcname}"
+#  cd "${srcdir}/${_srcname}"
+   echo "build"
 
-  # get kernel version
-  make prepare
-
-  # load configuration
-  # Configure the kernel. Replace the line below with one of your choice.
-  #make menuconfig # CLI menu for configuration
-  #make nconfig # new CLI menu for configuration
-  #make xconfig # X-based configuration
-  #make oldconfig # using old config from previous kernel version
-  #make bcmrpi_defconfig # using RPi defconfig
-  # ... or manually edit .config
-
-  # Copy back our configuration (use with new kernel version)
-  #cp ./.config ../${pkgver}.config
-
-  ####################
-  # stop here
-  # this is useful to configure the kernel
-  #msg "Stopping build"
-  #return 1
-  ####################
-
-  #yes "" | make config
-
-  make ${MAKEFLAGS} zImage modules dtbs
 }
 
 _package() {
-  pkgdesc="The Linux Kernel and modules - ${_desc}"
-  depends=('coreutils' 'linux-firmware' 'kmod' 'mkinitcpio>=0.7')
-  optdepends=('crda: to set the correct wireless channels of your country')
-  provides=('kernel26' "linux=${pkgver}")
-  conflicts=('kernel26' 'linux')
-  install=${pkgname}.install
-  backup=('boot/config.txt' 'boot/cmdline.txt')
-  replaces=('linux-raspberrypi-latest')
 
   cd "${srcdir}/${_srcname}"
-
-  KARCH=arm
 
   # get kernel version
   _kernver="$(make kernelrelease)"
