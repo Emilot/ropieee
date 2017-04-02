@@ -1,0 +1,66 @@
+#!/bin/bash
+
+# this script is run on SETUP.
+
+# set hostname
+echo ropieee > /etc/hostname
+
+# first cleanup a little bit
+pacman -Ru man-pages man-db mdadm cryptsetup reiserfsprogs jfsutils xfsprogs device-mapper lvm2 texinfo psmisc
+
+# install packages
+pacman -Syu --needed htop alsa-utils alsa-firmware ntp dosfstools
+
+# fix ssh access for root (permitRootlogin yes in sshd_config)
+cp ./sshd_config /etc/ssh
+
+# fix modprobe for usb devices
+cp ./alsa-base.conf /etc/modprobe.d
+
+# disable wifi
+cp ./99-blacklist.conf /etc/modprobe.d
+
+# everything in ram
+cp ./fstab /etc
+
+# only volatile logging
+cp ./journald.conf /etc/systemd
+systemctl daemon-reload
+
+# setup bootstrap script
+cat << _EOF_ > /etc/systemd/system/ropieee-bootstrap.service
+[Unit]
+Description=RoPieee-Bootstrap
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/bash -c '/boot/ropieee/bootstrap'
+StandardOutput=journal+console
+
+[Install]
+WantedBy=multi-user.target
+_EOF_
+
+systemctl enable ropieee-bootstrap.service
+systemctl enable systemd-networkd-wait-online
+systemctl daemon-reload
+
+# setup time
+ln -sf /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
+systemctl disable systemd-timesyncd
+systemctl enable ntpdate
+systemctl enable ntpd
+
+# install custom kernel
+pacman -U /boot/kernel_update/linux-raspberrypi-dsd*
+
+# run update
+pacman -Syu
+
+# install RoonBridge
+chmod +x ./roonbridge-installer-linuxarmv7hf.sh
+./roonbridge-installer-linuxarmv7hf.sh <<< y
+

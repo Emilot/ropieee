@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# this script is run on bootup. it runs through the several stages of installation
+STAGE_PTR="/boot/RoPieee/.install_stage"
+
+
+
+Partition_SD()
+{
+   cat << _EOF_ | fdisk /dev/mmcblk0
+p
+d
+2
+n
+p
+2
+$(parted /dev/mmcblk0 -ms unit s p | grep ':ext4::;' | sed 's/:/ /g' | sed 's/s//g' | awk '{ print $2 }')
+
+p
+w
+
+_EOF_
+}
+
+Expand_SD()
+{
+   #Resize Filesystem to new partition size
+   resize2fs /dev/mmcblk0p2
+}
+
+stage2()
+{
+   echo " ** stage2"
+}
+
+stage1()
+{
+   echo " ** stage1"
+   Expand_SD
+
+   # now set our definite hostname
+   #echo "ropieee-$( systemd-machine-id-setup --print | cut -c-6 )" > /etc/hostname
+
+   echo 2 > $STAGE_PTR
+   reboot
+}
+
+stage0()
+{
+   echo " ** stage0"
+   Partition_SD
+   
+   echo 1 > $STAGE_PTR
+   reboot
+}
+
+
+
+echo "*** bootstrapping RoPieee ***"
+BOOTSTRAP_STAGE=$( cat ${STAGE_PTR} )
+
+stage${BOOTSTRAP_STAGE}
+
+exit 0
+
