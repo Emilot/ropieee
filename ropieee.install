@@ -1,0 +1,7 @@
+post_install()
+{
+   if [ ! -f /boot/RoPieee/.install_stage ]
+   then
+      echo 0 > /boot/RoPieee/.install_stage
+   fi
+}
