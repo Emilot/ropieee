@@ -20,6 +20,9 @@ cp ./alsa-base.conf /etc/modprobe.d
 # disable wifi
 cp ./99-blacklist.conf /etc/modprobe.d
 
+# tune kernel params
+cp ./ropieee.conf /etc/sysctl.d
+
 # everything in ram
 cp ./fstab /etc
 
