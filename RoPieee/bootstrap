@@ -24,22 +24,22 @@ _EOF_
 
 Expand_SD()
 {
-   #Resize Filesystem to new partition size
+   # Resize Filesystem to new partition size
    resize2fs /dev/mmcblk0p2
 }
 
 stage2()
 {
    echo " ** stage2"
+
+   . /etc/ropieee.conf
+   /sbin/shutdown -r $rp_reboottime
 }
 
 stage1()
 {
    echo " ** stage1"
    Expand_SD
-
-   # now set our definite hostname
-   #echo "ropieee-$( systemd-machine-id-setup --print | cut -c-6 )" > /etc/hostname
 
    echo 2 > $STAGE_PTR
    reboot
