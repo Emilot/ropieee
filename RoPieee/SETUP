@@ -11,12 +11,6 @@ rp_hostname=ropieee
 rp_reboottime=3:04
 _EOF_
 
-# first cleanup a little bit
-pacman -Ru man-pages man-db mdadm cryptsetup reiserfsprogs jfsutils xfsprogs device-mapper lvm2 texinfo psmisc
-
-# install packages
-pacman -Syu --needed htop alsa-utils alsa-firmware ntp dosfstools f2fs-tools avahi
-
 # fix ssh access for root (permitRootlogin yes in sshd_config)
 cp ./sshd_config /etc/ssh
 
@@ -62,12 +56,6 @@ ln -sf /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
 systemctl disable systemd-timesyncd
 systemctl enable ntpdate
 systemctl enable ntpd
-
-# install custom kernel
-pacman -U /boot/kernel_update/linux-raspberrypi-dsd*
-
-# run update
-pacman -Syu
 
 # install RoonBridge
 chmod +x ./roonbridge-installer-linuxarmv7hf.sh
