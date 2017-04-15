@@ -6,6 +6,7 @@ pkgrel=4
 arch=(any)
 url="http://www.kernel.org/"
 license=(MIT)
+depends=(ropieee-be)
 install=${pkgname}.install
 
 
