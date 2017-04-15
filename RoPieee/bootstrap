@@ -30,6 +30,7 @@ Expand_SD()
 
 stage2()
 {
+   # we're done. this is business as usual
    echo " ** stage2"
 
    . /etc/ropieee.conf
@@ -40,6 +41,9 @@ stage1()
 {
    echo " ** stage1"
    Expand_SD
+
+   # enable the backend
+   systemctl enable ropieee-be
 
    echo 2 > $STAGE_PTR
    reboot
