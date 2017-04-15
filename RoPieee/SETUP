@@ -40,7 +40,7 @@ After=network-online.target
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/bin/bash -c '/boot/ropieee/bootstrap'
+ExecStart=/bin/bash -c '/boot/RoPieee/bootstrap'
 StandardOutput=journal+console
 SyslogIdentifier=ropieee-update
 
@@ -61,7 +61,7 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=/bin/bash -c '/boot/ropieee/run-updates'
+ExecStart=/bin/bash -c '/boot/RoPieee/run-updates'
 StandardOutput=journal+console
 SyslogIdentifier=ropieee-update
 
