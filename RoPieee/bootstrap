@@ -25,7 +25,8 @@ _EOF_
 Expand_SD()
 {
    # Resize Filesystem to new partition size
-   resize2fs /dev/mmcblk0p2
+   #resize2fs /dev/mmcblk0p2
+   resize.f2fs /dev/mmcblk0p2
 }
 
 stage2()
