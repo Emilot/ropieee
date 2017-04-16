@@ -42,7 +42,7 @@ Type=oneshot
 RemainAfterExit=yes
 ExecStart=/bin/bash -c '/boot/RoPieee/bootstrap'
 StandardOutput=journal+console
-SyslogIdentifier=ropieee-update
+SyslogIdentifier=ropieee
 
 [Install]
 WantedBy=multi-user.target
