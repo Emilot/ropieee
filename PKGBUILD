@@ -5,8 +5,7 @@ pkgver=2
 pkgrel=5
 arch=(any)
 url="http://www.kernel.org/"
-license=(MIT)
-depends=(ropieee-web)
+license=('MIT')
 install=${pkgname}.install
 
 
@@ -27,4 +26,5 @@ echo "package"
    install -m0644 "../RoPieee/sshd_config"                          "${pkgdir}/boot/RoPieee"
    install -m0755 "../RoPieee/run-updates"                          "${pkgdir}/boot/RoPieee"
 }
+
 
