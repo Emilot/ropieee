@@ -63,7 +63,7 @@ After=network-online.target
 Type=oneshot
 ExecStart=/bin/bash -c '/boot/RoPieee/run-updates'
 StandardOutput=journal+console
-SyslogIdentifier=ropieee-update
+SyslogIdentifier=ropieee
 
 [Install]
 WantedBy=multi-user.target
@@ -81,7 +81,6 @@ WantedBy=timers.target
 _EOF_
 
 systemctl daemon-reload
-systemctl enable ropieee-update.service
 systemctl enable ropieee-update.timer
 
 # setup time
