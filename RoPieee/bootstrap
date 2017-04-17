@@ -29,9 +29,16 @@ Expand_SD()
    #resize2fs /dev/mmcblk0p2
 
    # for f2fs we can't resize a mounted fs, so we need to switch to rescue mode
+   cat << _EOF_ > /tmp/bbbootstrap
+umount /
+mount /boot
+resize.f2fs /dev/mmcblk0p2
+sleep 1
+echo 2 > /boot/RoPieee/.install_stage
+systemctl reboot
+_EOF_
+
    systemctl rescue
-   umount /
-   resize.f2fs /dev/mmcblk0p2
 }
 
 stage2()
