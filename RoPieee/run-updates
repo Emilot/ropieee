@@ -2,10 +2,6 @@
 
 # this script checks for updates
 
-STAGE_PTR="/boot/RoPieee/.install_stage"
-
-
-
 echo "* checking for updates..."
 pacman -Syu --needed <<< yes
 
