@@ -1,0 +1,22 @@
+#!/bin/bash
+
+CONF=/opt/RoPieee/conf
+
+FILE=$1
+if [ -n "$FILE" -a  ! -r "$FILE" ]
+then
+   echo "can't read file"
+   exit 1
+fi
+
+if [ -n "$FILE" ]
+then
+   cp $FILE /etc/ropieee.conf
+fi
+
+. /etc/ropieee.conf
+
+echo $rp_hostname > /etc/hostname
+
+exit 0 
+

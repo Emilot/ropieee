@@ -2,7 +2,7 @@
 
 pkgname=ropieee
 pkgver=3
-pkgrel=1
+pkgrel=2
 arch=(any)
 url="http://www.kernel.org/"
 license=('MIT')
@@ -30,5 +30,6 @@ echo "package"
    install -m0644 "../RoPieee/sshd_config"                          "${pkgdir}/opt/RoPieee/conf"
 
    install -m0755 "../RoPieee/run-updates"                          "${pkgdir}/opt/RoPieee/sbin"
+   install -m0755 "../RoPieee/configure"                            "${pkgdir}/opt/RoPieee/sbin"
 }
 
