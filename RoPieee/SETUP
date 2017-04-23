@@ -97,6 +97,9 @@ systemctl enable ntpd
 # set default target
 systemctl set-default multi-user.target
 
+# enable Avahi
+systemctl enable avahi-daemon
+
 # install RoonBridge
 $CONF/roonbridge-installer-linuxarmv7hf.sh <<< y
 
