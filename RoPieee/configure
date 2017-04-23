@@ -18,5 +18,13 @@ fi
 
 echo $rp_hostname > /etc/hostname
 
+# ok here we go!
+if [ -n "$FILE" ]
+then
+   echo "Configure finished. Rebooting!!!"
+   sleep 1
+   shutdown -r now
+fi
+
 exit 0 
 
