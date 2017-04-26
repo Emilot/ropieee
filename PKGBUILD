@@ -1,10 +1,10 @@
 # Maintainer: Harry ten Berge <htenberge@gmail.com>
 
 pkgname=ropieee
-pkgver=3
-pkgrel=4
+pkgver=4
+pkgrel=1
 arch=(any)
-url="http://www.kernel.org/"
+url="https://github.com/RoPieee/"
 license=('MIT')
 install=${pkgname}.install
 
@@ -17,19 +17,19 @@ echo "package"
    install -d "${pkgdir}/opt/RoPieee/sbin"
    install -d "${pkgdir}/opt/RoPieee/conf"
 
-   install -m0755 "../RoPieee/SETUP"                                "${pkgdir}/boot/RoPieee"
-   install -m0755 "../RoPieee/bootstrap"                            "${pkgdir}/boot/RoPieee"
+   install -m0755 "../ropieee/SETUP"                                "${pkgdir}/boot/RoPieee"
+   install -m0755 "../ropieee/bootstrap"                            "${pkgdir}/boot/RoPieee"
 
-   install -m0644 "../RoPieee/99-blacklist.conf"                    "${pkgdir}/opt/RoPieee/conf"
-   install -m0644 "../RoPieee/alsa-base.conf"                       "${pkgdir}/opt/RoPieee/conf"
-   install -m0644 "../RoPieee/fstab"                                "${pkgdir}/opt/RoPieee/conf"
-   install -m0644 "../RoPieee/journald.conf"                        "${pkgdir}/opt/RoPieee/conf"
-   install -m0755 "../RoPieee/roonbridge-installer-linuxarmv7hf.sh" "${pkgdir}/opt/RoPieee/conf"
-   install -m0644 "../RoPieee/ropieee.conf"                         "${pkgdir}/opt/RoPieee/conf"
-   install -m0644 "../RoPieee/rescue.service"                       "${pkgdir}/opt/RoPieee/conf"
-   install -m0644 "../RoPieee/sshd_config"                          "${pkgdir}/opt/RoPieee/conf"
+   install -m0644 "../ropieee/99-blacklist.conf"                    "${pkgdir}/opt/RoPieee/conf"
+   install -m0644 "../ropieee/alsa-base.conf"                       "${pkgdir}/opt/RoPieee/conf"
+   install -m0644 "../ropieee/fstab"                                "${pkgdir}/opt/RoPieee/conf"
+   install -m0644 "../ropieee/journald.conf"                        "${pkgdir}/opt/RoPieee/conf"
+   install -m0755 "../ropieee/roonbridge-installer-linuxarmv7hf.sh" "${pkgdir}/opt/RoPieee/conf"
+   install -m0644 "../ropieee/ropieee.conf"                         "${pkgdir}/opt/RoPieee/conf"
+   install -m0644 "../ropieee/rescue.service"                       "${pkgdir}/opt/RoPieee/conf"
+   install -m0644 "../ropieee/sshd_config"                          "${pkgdir}/opt/RoPieee/conf"
 
-   install -m0755 "../RoPieee/run-updates"                          "${pkgdir}/opt/RoPieee/sbin"
-   install -m0755 "../RoPieee/configure"                            "${pkgdir}/opt/RoPieee/sbin"
+   install -m0755 "../ropieee/run-updates"                          "${pkgdir}/opt/RoPieee/sbin"
+   install -m0755 "../ropieee/configure"                            "${pkgdir}/opt/RoPieee/sbin"
 }
 
