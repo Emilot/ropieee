@@ -16,7 +16,20 @@ fi
 
 . /etc/ropieee.conf
 
+# set the hostname
 echo $rp_hostname > /etc/hostname
+
+# configure audio
+if [ "$rp_audio" = "usb" ]
+then
+   echo "configuring USB audio"
+   sed -i '/dtoverlay=/d' /boot/config.txt
+   echo "options snd slots=snd-usb-audio" > /etc/modprobe.d/alsa-base.conf
+else
+   echo "configuring audio HAT $rp_audio"
+   rm -rf /etc/modprobe.d/alsa-base.conf
+   echo -e "\ndtoverlay=$rp_audio" >> /boot/config.txt
+fi
 
 # ok here we go!
 if [ -n "$FILE" ]
