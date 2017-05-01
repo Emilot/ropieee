@@ -1,16 +1,14 @@
 #!/bin/bash
 
-CONF=/opt/RoPieee/conf
-
 # this script is run on SETUP.
 
-# set hostname
-echo ropieee > /etc/hostname
+CONF=/opt/RoPieee/conf
 
 # setup initial config file
 cat << _EOF_ > /etc/ropieee.conf
 rp_hostname=ropieee
 rp_reboottime=3:04
+rp_audio=usb
 _EOF_
 
 # fix ssh access for root (permitRootlogin yes in sshd_config)
@@ -33,7 +31,6 @@ cp $CONF/journald.conf /etc/systemd
 
 # enable rescue mode
 cp $CONF/rescue.service /etc/systemd/system
-
 
 # setup bootstrap script
 cat << _EOF_ > /etc/systemd/system/ropieee-bootstrap.service
@@ -87,18 +84,6 @@ _EOF_
 
 systemctl daemon-reload
 systemctl enable ropieee-update.timer
-
-# setup time
-ln -sf /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
-systemctl disable systemd-timesyncd
-systemctl enable ntpdate
-systemctl enable ntpd
-
-# set default target
-systemctl set-default multi-user.target
-
-# enable Avahi
-systemctl enable avahi-daemon
 
 # install RoonBridge
 $CONF/roonbridge-installer-linuxarmv7hf.sh <<< y

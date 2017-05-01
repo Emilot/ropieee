@@ -1,8 +1,8 @@
 # Maintainer: Harry ten Berge <htenberge@gmail.com>
 
 pkgname=ropieee
-pkgver=4
-pkgrel=2
+pkgver=5
+pkgrel=1
 arch=(any)
 url="https://github.com/RoPieee/"
 license=('MIT')
@@ -16,6 +16,7 @@ echo "package"
    install -d "${pkgdir}/boot/RoPieee"
    install -d "${pkgdir}/opt/RoPieee/sbin"
    install -d "${pkgdir}/opt/RoPieee/conf"
+   install -d "${pkgdir}/opt/RoPieee/lib"
 
    install -m0755 "../ropieee/SETUP"                                "${pkgdir}/boot/RoPieee"
    install -m0755 "../ropieee/bootstrap"                            "${pkgdir}/boot/RoPieee"
@@ -31,5 +32,7 @@ echo "package"
 
    install -m0755 "../ropieee/run-updates"                          "${pkgdir}/opt/RoPieee/sbin"
    install -m0755 "../ropieee/configure"                            "${pkgdir}/opt/RoPieee/sbin"
+
+   install -m0755 "../ropieee/lib/*"                                "${pkgdir}/opt/RoPieee/lib"
 }
 

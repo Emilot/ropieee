@@ -1,6 +1,12 @@
 #!/bin/bash
+# $RP_BEGIN_HEADER$ --------------------------------------------
+#
+# Copyright (C) 2017 RoPieee
+#
+# $RP_END_HEADER$ ----------------------------------------------
 
 CONF=/opt/RoPieee/conf
+LIB=/opt/RoPieee/lib
 
 FILE=$1
 if [ -n "$FILE" -a  ! -r "$FILE" ]
@@ -24,11 +30,11 @@ if [ "$rp_audio" = "usb" ]
 then
    echo "configuring USB audio"
    sed -i '/dtoverlay=/d' /boot/config.txt
-   echo "options snd slots=snd-usb-audio" > /etc/modprobe.d/alsa-base.conf
+   $LIB/enable_usb_audio
 else
    echo "configuring audio HAT $rp_audio"
-   rm -rf /etc/modprobe.d/alsa-base.conf
    echo -e "\ndtoverlay=$rp_audio" >> /boot/config.txt
+   $LIB/disable_usb_audio
 fi
 
 # ok here we go!
