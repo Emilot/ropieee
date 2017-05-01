@@ -33,6 +33,7 @@ echo "package"
    install -m0755 "../ropieee/run-updates"                          "${pkgdir}/opt/RoPieee/sbin"
    install -m0755 "../ropieee/configure"                            "${pkgdir}/opt/RoPieee/sbin"
 
-   install -m0755 "../ropieee/lib/*"                                "${pkgdir}/opt/RoPieee/lib"
+   install -m0755 "../ropieee/lib/disable_usb_audio"                "${pkgdir}/opt/RoPieee/lib"
+   install -m0755 "../ropieee/lib/enable_usb_audio"                 "${pkgdir}/opt/RoPieee/lib"
 }
 
