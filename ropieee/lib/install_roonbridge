@@ -1,0 +1,8 @@
+#!/bin/bash
+
+URL="http://download.roonlabs.com/builds/RoonBridge_linuxarmv7hf.tar.bz2"
+
+wget -q -t 2 -T 30 -O /tmp/rb.tar.bz2 $URL
+
+exit $? 
+
