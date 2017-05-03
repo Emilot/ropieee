@@ -2,10 +2,11 @@
 
 # this script is run on bootup. it runs through the several stages of installation
 STAGE_PTR="/boot/RoPieee/.install_stage"
+LIB="/opt/RoPieee/lib"
 
 
 
-Partition_SD()
+partition_disk()
 {
    cat << _EOF_ | fdisk /dev/mmcblk0
 p
@@ -23,7 +24,7 @@ w
 _EOF_
 }
 
-Expand_SD()
+expand_fs()
 {
    # Resize Filesystem to new partition size
    #resize2fs /dev/mmcblk0p2
@@ -41,23 +42,35 @@ _EOF_
    systemctl rescue
 }
 
-stage2()
+stage3()
 {
    # we're done. this is business as usual
-   echo " ** stage2"
+   echo " ** stage3"
 
    . /etc/ropieee.conf
    /sbin/shutdown -r $rp_reboottime
+}
+
+stage2()
+{
+   # we're done with configuring storage.
+   echo " ** stage2"
+
+   # install RoonBridge
+   $LIB/install_roonbridge
+
+   # enable the web interface
+   systemctl enable ropieee-web
+
+   echo 3 > $STAGE_PTR
+   reboot
 }
 
 stage1()
 {
    echo " ** stage1"
 
-   # enable the web interface
-   systemctl enable ropieee-web
-
-   Expand_SD
+   expand_fs
 
    echo 2 > $STAGE_PTR
    reboot
@@ -67,7 +80,7 @@ stage0()
 {
    echo " ** stage0"
 
-   Partition_SD
+   partition_disk
    
    echo 1 > $STAGE_PTR
    reboot
