@@ -1,8 +1,21 @@
 #!/bin/bash
+# $RP_BEGIN_HEADER$ --------------------------------------------
+#
+# Copyright (C) 2017 RoPieee
+#
+# $RP_END_HEADER$ ----------------------------------------------
 
-URL="http://download.roonlabs.com/builds/RoonBridge_linuxarmv7hf.tar.bz2"
+URL="http://download.roonlabs.com/builds/roonbridge-installer-linuxarmv7hf.sh"
 
-wget -q -t 2 -T 30 -O /tmp/rb.tar.bz2 $URL
+wget -q -t 2 -T 30 -O /tmp/roonbridge.sh $URL
+if [ $? -ne 0 ]
+then
+   echo "Error. Downloading RoonBridge failed!"
+   exit 1
+fi
+
+chmod +x /tmp/roonbridge.sh
+/tmp/roonbridge.sh <<< y
 
 exit $? 
 
