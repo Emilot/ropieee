@@ -1,7 +1,7 @@
 # Maintainer: Harry ten Berge <htenberge@gmail.com>
 
 pkgname=ropieee
-pkgver=5
+pkgver=6
 pkgrel=1
 arch=(any)
 url="https://github.com/RoPieee/"
@@ -35,5 +35,6 @@ echo "package"
 
    install -m0755 "../ropieee/lib/disable_usb_audio"                "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/enable_usb_audio"                 "${pkgdir}/opt/RoPieee/lib"
+   install -m0755 "../ropieee/lib/install_roonbridge"               "${pkgdir}/opt/RoPieee/lib"
 }
 
