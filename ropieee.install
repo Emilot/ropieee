@@ -5,3 +5,12 @@ post_install()
       echo 0 > /boot/RoPieee/.install_stage
    fi
 }
+
+post_upgrade()
+{
+   # compat trick due to adding of stage3
+   if [ $( cat /boot/RoPieee/.install_stage ) -eq 2 ]
+   then
+      echo 3 > /boot/RoPieee/.install_stage
+   fi
+}

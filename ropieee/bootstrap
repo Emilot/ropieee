@@ -62,6 +62,9 @@ stage2()
    # enable the web interface
    systemctl enable ropieee-web
 
+   # enable automatic updates
+   systemctl enable ropieee-update.timer
+
    echo 3 > $STAGE_PTR
    reboot
 }

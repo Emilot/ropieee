@@ -83,7 +83,7 @@ WantedBy=timers.target
 _EOF_
 
 systemctl daemon-reload
-systemctl enable ropieee-update.timer
+#systemctl enable ropieee-update.timer
 
 ## install RoonBridge
 #$CONF/roonbridge-installer-linuxarmv7hf.sh <<< y
