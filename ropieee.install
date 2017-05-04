@@ -1,9 +1,24 @@
 post_install()
 {
+   if [ ! -f /etc/ropieee.conf ]
+   then
+      # setup initial config file
+      cat << _EOF_ > /etc/ropieee.conf
+rp_hostname=ropieee
+rp_reboottime=03:04
+rp_audio=usb
+_EOF_
+   fi
+
    if [ ! -f /boot/RoPieee/.install_stage ]
    then
       echo 0 > /boot/RoPieee/.install_stage
    fi
+
+   systemctl daemon-reload
+
+   # and enable the services of course
+   systemctl enable ropieee-bootstrap.service
 }
 
 post_upgrade()
@@ -13,4 +28,6 @@ post_upgrade()
    then
       echo 3 > /boot/RoPieee/.install_stage
    fi
+
+   systemctl daemon-reload
 }

@@ -17,6 +17,7 @@ echo "package"
    install -d "${pkgdir}/opt/RoPieee/sbin"
    install -d "${pkgdir}/opt/RoPieee/conf"
    install -d "${pkgdir}/opt/RoPieee/lib"
+   install -d "${pkgdir}/etc/systemd/system"
 
    install -m0755 "../ropieee/SETUP"                                "${pkgdir}/boot/RoPieee"
    install -m0755 "../ropieee/bootstrap"                            "${pkgdir}/boot/RoPieee"
@@ -36,5 +37,9 @@ echo "package"
    install -m0755 "../ropieee/lib/disable_usb_audio"                "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/enable_usb_audio"                 "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/install_roonbridge"               "${pkgdir}/opt/RoPieee/lib"
+
+   install -m0644 "../ropieee/res/ropieee-bootstrap.service"        "${pkgdir}/etc/systemd/system"
+   install -m0644 "../ropieee/res/ropieee-update.service"           "${pkgdir}/etc/systemd/system"
+   install -m0644 "../ropieee/res/ropieee-update.timer"             "${pkgdir}/etc/systemd/system"
 }
 
