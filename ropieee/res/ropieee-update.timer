@@ -1,0 +1,9 @@
+[Unit]
+Description=Run ropieee-update on every boot
+
+[Timer]
+OnBootSec=15min
+
+[Install]
+WantedBy=timers.target
+

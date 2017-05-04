@@ -1,0 +1,14 @@
+[Unit]
+Description=RoPieee-Update
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c '/opt/RoPieee/sbin/run-updates'
+StandardOutput=journal+console
+SyslogIdentifier=ropieee-update
+
+[Install]
+WantedBy=multi-user.target
+
