@@ -1,8 +1,8 @@
 # Maintainer: Harry ten Berge <htenberge@gmail.com>
 
 pkgname=ropieee
-pkgver=6
-pkgrel=2
+pkgver=7
+pkgrel=1
 arch=(any)
 url="https://github.com/RoPieee/"
 license=('MIT')
@@ -26,7 +26,6 @@ echo "package"
    install -m0644 "../ropieee/alsa-base.conf"                       "${pkgdir}/opt/RoPieee/conf"
    install -m0644 "../ropieee/fstab"                                "${pkgdir}/opt/RoPieee/conf"
    install -m0644 "../ropieee/journald.conf"                        "${pkgdir}/opt/RoPieee/conf"
-   install -m0755 "../ropieee/roonbridge-installer-linuxarmv7hf.sh" "${pkgdir}/opt/RoPieee/conf"
    install -m0644 "../ropieee/ropieee.conf"                         "${pkgdir}/opt/RoPieee/conf"
    install -m0644 "../ropieee/rescue.service"                       "${pkgdir}/opt/RoPieee/conf"
    install -m0644 "../ropieee/sshd_config"                          "${pkgdir}/opt/RoPieee/conf"
@@ -38,8 +37,8 @@ echo "package"
    install -m0755 "../ropieee/lib/enable_usb_audio"                 "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/install_roonbridge"               "${pkgdir}/opt/RoPieee/lib"
 
-   install -m0644 "../ropieee/res/ropieee-bootstrap.service"        "${pkgdir}/etc/systemd/system"
-   install -m0644 "../ropieee/res/ropieee-update.service"           "${pkgdir}/etc/systemd/system"
-   install -m0644 "../ropieee/res/ropieee-update.timer"             "${pkgdir}/etc/systemd/system"
+   install -m0644 "../ropieee/res/ropieee1-bootstrap.service"       "${pkgdir}/etc/systemd/system"
+   install -m0644 "../ropieee/res/ropieee1-update.service"          "${pkgdir}/etc/systemd/system"
+   install -m0644 "../ropieee/res/ropieee1-update.timer"            "${pkgdir}/etc/systemd/system"
 }
 

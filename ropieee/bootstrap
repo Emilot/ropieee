@@ -60,10 +60,10 @@ stage2()
    $LIB/install_roonbridge
 
    # enable the web interface
-   systemctl enable ropieee-web
+   systemctl enable ropieee1-web
 
    # enable automatic updates
-   systemctl enable ropieee-update.timer
+   systemctl enable ropieee1-update.timer
 
    echo 3 > $STAGE_PTR
    reboot
