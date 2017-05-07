@@ -1,0 +1,35 @@
+#!/bin/bash
+
+arg1=$1
+
+echo none > /sys/class/leds/led0/trigger
+
+running()
+{
+   while true
+   do
+      echo 1 >/sys/class/leds/led0/brightness
+      sleep 1
+      echo 0 >/sys/class/leds/led0/brightness
+      sleep 1
+   done
+}
+
+installation()
+{
+   while true
+   do
+      echo 1 >/sys/class/leds/led0/brightness
+      usleep 100000
+      echo 0 >/sys/class/leds/led0/brightness
+      usleep 100000
+   done
+}
+
+if [ "$arg1" = "running" ]
+then
+   running
+else
+   installation
+fi
+

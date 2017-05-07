@@ -45,16 +45,16 @@ _EOF_
 stage3()
 {
    # we're done. this is business as usual
-   echo " ** stage3"
+   echo " **** RoPieee RUNNING ****"
 
-#   . /etc/ropieee.conf
-#   /sbin/shutdown -r $rp_reboottime
+   systemctl stop ropieee1-led
+   /boot/RoPieee/control_led running &
 }
 
 stage2()
 {
    # we're done with configuring storage.
-   echo " ** stage2"
+   echo " **** RoPieee stage 2 ****"
 
    # install RoonBridge
    $LIB/install_roonbridge
@@ -69,26 +69,35 @@ stage2()
    systemctl enable ropieee1-reboot.timer
 
    echo 3 > $STAGE_PTR
+
+   journalctl > /boot/RoPieee/log/stage2.log
    reboot
 }
 
 stage1()
 {
-   echo " ** stage1"
+   echo " **** RoPieee stage 1 ****"
 
    expand_fs
 
    echo 2 > $STAGE_PTR
+
+   journalctl > /boot/RoPieee/log/stage1.log
    reboot
 }
 
 stage0()
 {
-   echo " ** stage0"
+   echo " **** RoPieee stage 0 ****"
 
    partition_disk
    
    echo 1 > $STAGE_PTR
+
+   mkdir -p /boot/RoPieee/log
+   rm -f /boot/RoPieee/SETUP
+
+   journalctl > /boot/RoPieee/log/stage0.log
    reboot
 }
 

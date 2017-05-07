@@ -21,6 +21,7 @@ echo "package"
 
    install -m0755 "../ropieee/SETUP"                                "${pkgdir}/boot/RoPieee"
    install -m0755 "../ropieee/bootstrap"                            "${pkgdir}/boot/RoPieee"
+   install -m0755 "../ropieee/control_led"                          "${pkgdir}/boot/RoPieee"
 
    install -m0644 "../ropieee/99-blacklist.conf"                    "${pkgdir}/opt/RoPieee/conf"
    install -m0644 "../ropieee/alsa-base.conf"                       "${pkgdir}/opt/RoPieee/conf"
@@ -43,5 +44,6 @@ echo "package"
    install -m0644 "../ropieee/res/ropieee1-update.timer"            "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/res/ropieee1-reboot.service"          "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/res/ropieee1-reboot.timer"            "${pkgdir}/etc/systemd/system"
+   install -m0644 "../ropieee/res/ropieee1-led.service"             "${pkgdir}/etc/systemd/system"
 }
 

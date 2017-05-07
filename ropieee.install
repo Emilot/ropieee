@@ -20,6 +20,7 @@ _EOF_
 
    # and enable the service of course
    systemctl enable ropieee1-bootstrap.service
+   systemctl enable ropieee1-led.service
 }
 
 pre_upgrade()
@@ -55,6 +56,7 @@ post_upgrade()
 
    # and enable the services of course (necessary for updates that introduce new services)
    systemctl enable ropieee1-bootstrap.service
+   systemctl enable ropieee1-led.service
    systemctl enable ropieee1-update.timer
    systemctl enable ropieee1-reboot.timer
 }
