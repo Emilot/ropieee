@@ -1,8 +1,8 @@
 # Maintainer: Harry ten Berge <htenberge@gmail.com>
 
 pkgname=ropieee
-pkgver=7
-pkgrel=2
+pkgver=8
+pkgrel=1
 arch=(any)
 url="https://github.com/RoPieee/"
 license=('MIT')
