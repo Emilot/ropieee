@@ -18,7 +18,7 @@ _EOF_
    # reload systemd
    systemctl daemon-reload
 
-   # and enable the services of course
+   # and enable the service of course
    systemctl enable ropieee1-bootstrap.service
 }
 
@@ -53,7 +53,8 @@ post_upgrade()
    # reload systemd
    systemctl daemon-reload
 
-   # and enable the services of course
+   # and enable the services of course (necessary for updates that introduce new services)
    systemctl enable ropieee1-bootstrap.service
    systemctl enable ropieee1-update.timer
+   systemctl enable ropieee1-reboot.timer
 }

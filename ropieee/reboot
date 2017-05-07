@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# this script reboots the RoPieee
+mkdir -p /opt/RoPieee/log
+
+echo "* preparing for reboot..."
+BASE_LOGFILE="/opt/RoPieee/log/ropieee-$( date +%Y%m%d ).log"
+
+I=1
+LOGFILE=$BASE_LOGFILE
+while [ -f $LOGFILE ]
+do
+   LOGFILE="${BASE_LOGFILE}.${I}"
+   I=$( expr $I + 1 )
+done
+
+journalctl > $LOGFILE
+
+/sbin/reboot

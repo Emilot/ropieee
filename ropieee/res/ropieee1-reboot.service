@@ -1,0 +1,14 @@
+[Unit]
+Description=RoPieee-Reboot
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c '/opt/RoPieee/sbin/reboot'
+StandardOutput=journal+console
+SyslogIdentifier=ropieee-reboot
+
+[Install]
+WantedBy=multi-user.target
+

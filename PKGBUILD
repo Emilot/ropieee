@@ -32,6 +32,7 @@ echo "package"
 
    install -m0755 "../ropieee/run-updates"                          "${pkgdir}/opt/RoPieee/sbin"
    install -m0755 "../ropieee/configure"                            "${pkgdir}/opt/RoPieee/sbin"
+   install -m0755 "../ropieee/reboot"                               "${pkgdir}/opt/RoPieee/sbin"
 
    install -m0755 "../ropieee/lib/disable_usb_audio"                "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/enable_usb_audio"                 "${pkgdir}/opt/RoPieee/lib"
@@ -40,5 +41,7 @@ echo "package"
    install -m0644 "../ropieee/res/ropieee1-bootstrap.service"       "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/res/ropieee1-update.service"          "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/res/ropieee1-update.timer"            "${pkgdir}/etc/systemd/system"
+   install -m0644 "../ropieee/res/ropieee1-reboot.service"          "${pkgdir}/etc/systemd/system"
+   install -m0644 "../ropieee/res/ropieee1-reboot.timer"            "${pkgdir}/etc/systemd/system"
 }
 

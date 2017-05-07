@@ -47,8 +47,8 @@ stage3()
    # we're done. this is business as usual
    echo " ** stage3"
 
-   . /etc/ropieee.conf
-   /sbin/shutdown -r $rp_reboottime
+#   . /etc/ropieee.conf
+#   /sbin/shutdown -r $rp_reboottime
 }
 
 stage2()
@@ -64,6 +64,9 @@ stage2()
 
    # enable automatic updates
    systemctl enable ropieee1-update.timer
+
+   # enable scheduled reboots
+   systemctl enable ropieee1-reboot.timer
 
    echo 3 > $STAGE_PTR
    reboot
