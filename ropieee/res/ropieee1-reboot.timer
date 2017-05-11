@@ -1,9 +1,0 @@
-[Unit]
-Description=Reboot
-
-[Timer]
-OnCalendar=03:04
-
-[Install]
-WantedBy=timers.target
-

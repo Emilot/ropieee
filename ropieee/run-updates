@@ -2,6 +2,6 @@
 
 # this script checks for updates
 
-echo "* checking for updates..."
+echo "*** RoPieee: checking for updates..."
 pacman -Syu --needed <<< yes
 

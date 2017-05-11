@@ -23,6 +23,7 @@ echo "package"
    install -m0755 "../ropieee/SETUP"                                "${pkgdir}/boot/RoPieee"
    install -m0755 "../ropieee/bootstrap"                            "${pkgdir}/boot/RoPieee"
    install -m0755 "../ropieee/control_led"                          "${pkgdir}/boot/RoPieee"
+   install -m0755 "../ropieee/check_ntp_offset"                     "${pkgdir}/boot/RoPieee"
 
    install -m0644 "../ropieee/99-blacklist.conf"                    "${pkgdir}/opt/RoPieee/conf"
    install -m0644 "../ropieee/alsa-base.conf"                       "${pkgdir}/opt/RoPieee/conf"

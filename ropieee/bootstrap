@@ -43,13 +43,37 @@ _EOF_
    systemctl rescue
 }
 
+wait_for_timesync()
+{
+   while true
+   do
+      /boot/RoPieee/check_ntp_offset
+      test $? -eq 0 && return
+      sleep 1
+   done
+}
+
+
 stage3()
 {
    # we're done. this is business as usual
    echo " **** RoPieee RUNNING ****"
 
+   # change led control
    systemctl stop ropieee1-led
    /boot/RoPieee/control_led running &
+
+   wait_for_timesync
+   sleep 10
+
+   . /etc/ropieee.conf
+   shutdown -r $rp_reboottime
+
+   # let's go to bed...
+   while true
+   do
+      sleep 60
+   done
 }
 
 stage2()
@@ -66,9 +90,6 @@ stage2()
    # enable automatic updates
    systemctl enable ropieee1-update.timer
 
-   # enable scheduled reboots
-   systemctl enable ropieee1-reboot.timer
-
    echo 3 > $STAGE_PTR
 
    journalctl > /boot/RoPieee/log/stage2.log
@@ -81,7 +102,7 @@ stage1()
 
    expand_fs
 
-   # we should never come here
+   # we're not coming here...
    echo 2 > $STAGE_PTR
 
    journalctl > /boot/RoPieee/log/stage1.log

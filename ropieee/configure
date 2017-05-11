@@ -37,11 +37,6 @@ else
    $LIB/disable_usb_audio
 fi
 
-# configure the reboot time
-echo "configuring reboot time"
-cat /etc/systemd/system/ropieee1-reboot.timer | sed -e s/'^OnCalendar=.*'/"OnCalendar=${rp_reboottime}"/ > /tmp/ropieee1-reboot.timer
-cp /tmp/ropieee1-reboot.timer /etc/systemd/system/ropieee1-reboot.timer
-
 systemctl daemon-reload
 
 # ok here we go!

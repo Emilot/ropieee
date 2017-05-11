@@ -1,0 +1,20 @@
+#!/bin/bash
+
+limit=1000   # Set your limit in milliseconds here
+
+if [ $( ntpq -nc peers 2>&1 | grep -c 'refused' ) -gt 0 ]
+then
+   exit 1
+fi
+
+offsets=$(ntpq -nc peers 2>&1 | tail -n +3 | cut -c 62-66 | tr -d '-')
+for offset in ${offsets}; do
+    if [ ${offset:-0} -ge ${limit:-100} ]; then
+        echo "*** RoPieee: an NTPD offset is excessive - Please investigate"
+        exit 1  
+    fi  
+done
+
+echo "*** RoPieee: NTPD ok"
+exit 0
+

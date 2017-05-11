@@ -1,11 +1,12 @@
 [Unit]
 Description=RoPieee-Reboot
-Wants=network-online.target
-After=network-online.target
+Before=shutdown.target reboot.target halt.target
 
 [Service]
 Type=oneshot
-ExecStart=/bin/bash -c '/opt/RoPieee/sbin/reboot'
+ExecStart=/bin/true
+ExecStop=/bin/bash -c '/opt/RoPieee/sbin/reboot'
+RemainAfterExit=yes
 StandardOutput=journal+console
 SyslogIdentifier=ropieee-reboot
 

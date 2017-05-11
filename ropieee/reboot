@@ -3,7 +3,7 @@
 # this script reboots the RoPieee
 mkdir -p /opt/RoPieee/log
 
-echo "* preparing for reboot..."
+echo "*** RoPieee: preparing for reboot..."
 BASE_LOGFILE="/opt/RoPieee/log/ropieee-$( date +%Y%m%d ).log"
 
 I=1
@@ -16,4 +16,4 @@ done
 
 journalctl > $LOGFILE
 
-/sbin/reboot
+# /sbin/reboot
