@@ -51,6 +51,9 @@ post_upgrade()
       echo 3 > /boot/RoPieee/.install_stage
    fi
 
+   # run configure
+   /opt/RoPieee/sbin/configure
+
    # reload systemd
    systemctl daemon-reload
 
@@ -58,5 +61,4 @@ post_upgrade()
    systemctl enable ropieee1-bootstrap.service
    systemctl enable ropieee1-led.service
    systemctl enable ropieee1-update.timer
-   systemctl enable ropieee1-reboot.timer
 }
