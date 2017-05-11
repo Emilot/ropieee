@@ -36,6 +36,7 @@ mount /boot
 resize.f2fs /dev/mmcblk0p2
 sleep 1
 echo 2 > /boot/RoPieee/.install_stage
+journalctl > /boot/RoPieee/log/stage1.log
 systemctl reboot
 _EOF_
 
@@ -80,6 +81,7 @@ stage1()
 
    expand_fs
 
+   # we should never come here
    echo 2 > $STAGE_PTR
 
    journalctl > /boot/RoPieee/log/stage1.log
