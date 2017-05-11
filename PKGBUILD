@@ -6,6 +6,7 @@ pkgrel=1
 arch=(any)
 url="https://github.com/RoPieee/"
 license=('MIT')
+depends=('usleep')
 install=${pkgname}.install
 
 
