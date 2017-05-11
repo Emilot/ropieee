@@ -1,7 +1,7 @@
 # Maintainer: Harry ten Berge <htenberge@gmail.com>
 
 pkgname=ropieee
-pkgver=8
+pkgver=9
 pkgrel=1
 arch=(any)
 url="https://github.com/RoPieee/"
@@ -45,7 +45,6 @@ echo "package"
    install -m0644 "../ropieee/res/ropieee1-update.service"          "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/res/ropieee1-update.timer"            "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/res/ropieee1-reboot.service"          "${pkgdir}/etc/systemd/system"
-   install -m0644 "../ropieee/res/ropieee1-reboot.timer"            "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/res/ropieee1-led.service"             "${pkgdir}/etc/systemd/system"
 }
 
