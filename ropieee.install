@@ -1,8 +1,10 @@
 post_install()
 {
+   CONF=/opt/RoPieee/conf
+
+   # setup initial config file
    if [ ! -f /etc/ropieee.conf ]
    then
-      # setup initial config file
       cat << _EOF_ > /etc/ropieee.conf
 rp_hostname=ropieee
 rp_reboottime=03:04
@@ -10,10 +12,29 @@ rp_audio=usb
 _EOF_
    fi
 
+   # we're only beginning!
    if [ ! -f /boot/RoPieee/.install_stage ]
    then
       echo 0 > /boot/RoPieee/.install_stage
    fi
+
+   # fix ssh access for root (permitRootlogin yes in sshd_config)
+   cp $CONF/sshd_config /etc/ssh
+
+   # fix modprobe for usb devices
+   cp $CONF/alsa-base.conf /etc/modprobe.d
+
+   # disable wifi
+   cp $CONF/99-blacklist.conf /etc/modprobe.d
+
+   # tune kernel params
+   cp $CONF/ropieee.conf /etc/sysctl.d
+
+   # everything in ram
+   cp $CONF/fstab /etc
+
+   # only volatile logging
+   cp $CONF/journald.conf /etc/systemd
 
    # reload systemd
    systemctl daemon-reload

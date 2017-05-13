@@ -22,6 +22,3 @@ cp $CONF/fstab /etc
 # only volatile logging
 cp $CONF/journald.conf /etc/systemd
 
-# enable rescue mode
-cp $CONF/rescue.service /etc/systemd/system
-

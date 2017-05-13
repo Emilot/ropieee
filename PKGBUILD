@@ -30,7 +30,6 @@ echo "package"
    install -m0644 "../ropieee/fstab"                                "${pkgdir}/opt/RoPieee/conf"
    install -m0644 "../ropieee/journald.conf"                        "${pkgdir}/opt/RoPieee/conf"
    install -m0644 "../ropieee/ropieee.conf"                         "${pkgdir}/opt/RoPieee/conf"
-   install -m0644 "../ropieee/rescue.service"                       "${pkgdir}/opt/RoPieee/conf"
    install -m0644 "../ropieee/sshd_config"                          "${pkgdir}/opt/RoPieee/conf"
 
    install -m0755 "../ropieee/run-updates"                          "${pkgdir}/opt/RoPieee/sbin"
@@ -41,10 +40,14 @@ echo "package"
    install -m0755 "../ropieee/lib/enable_usb_audio"                 "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/install_roonbridge"               "${pkgdir}/opt/RoPieee/lib"
 
-   install -m0644 "../ropieee/res/ropieee1-bootstrap.service"       "${pkgdir}/etc/systemd/system"
-   install -m0644 "../ropieee/res/ropieee1-update.service"          "${pkgdir}/etc/systemd/system"
-   install -m0644 "../ropieee/res/ropieee1-update.timer"            "${pkgdir}/etc/systemd/system"
-   install -m0644 "../ropieee/res/ropieee1-reboot.service"          "${pkgdir}/etc/systemd/system"
-   install -m0644 "../ropieee/res/ropieee1-led.service"             "${pkgdir}/etc/systemd/system"
+   install -m0644 "../ropieee/systemd/ropieee1-bootstrap.service"   "${pkgdir}/etc/systemd/system"
+   install -m0644 "../ropieee/systemd/ropieee1-update.service"      "${pkgdir}/etc/systemd/system"
+   install -m0644 "../ropieee/systemd/ropieee1-update.timer"        "${pkgdir}/etc/systemd/system"
+   install -m0644 "../ropieee/systemd/ropieee1-reboot.service"      "${pkgdir}/etc/systemd/system"
+   install -m0644 "../ropieee/systemd/ropieee1-led.service"         "${pkgdir}/etc/systemd/system"
+
+   # overruling some default services
+   install -m0644 "../ropieee/systemd/ntpd.service"                 "${pkgdir}/etc/systemd/system"
+   install -m0644 "../ropieee/systemd/rescue.service"               "${pkgdir}/etc/systemd/system"
 }
 
