@@ -26,6 +26,14 @@ installation()
    done
 }
 
+stop()
+{
+   echo 0 >/sys/class/leds/led0/brightness
+   exit 0
+}
+
+trap 'stop' SIGINT SIGTERM
+
 if [ "$arg1" = "running" ]
 then
    running

@@ -5,8 +5,7 @@ After=local-fs.target
 
 [Service]
 Type=simple
-RemainAfterExit=yes
-ExecStart=/bin/bash -c '/boot/RoPieee/control_led'
+ExecStart=/boot/RoPieee/control_led
 
 [Install]
 WantedBy=sysinit.target
