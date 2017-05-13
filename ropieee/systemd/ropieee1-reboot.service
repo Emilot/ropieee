@@ -1,5 +1,5 @@
 [Unit]
-Description=RoPieee-Reboot
+Description=RoPieee reboot prepare
 Before=shutdown.target reboot.target halt.target
 
 [Service]

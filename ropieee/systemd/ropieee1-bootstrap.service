@@ -1,5 +1,5 @@
 [Unit]
-Description=RoPieee-Bootstrap
+Description=RoPieee bootstrap process
 Wants=network-online.target
 After=network-online.target
 
