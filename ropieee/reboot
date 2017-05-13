@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# this script reboots the RoPieee
+# this script is run before the RoPieee reboots
 mkdir -p /opt/RoPieee/log
 
 echo "*** RoPieee: preparing for reboot..."
@@ -15,5 +15,3 @@ do
 done
 
 journalctl > $LOGFILE
-
-# /sbin/reboot

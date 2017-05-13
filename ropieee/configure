@@ -44,7 +44,7 @@ if [ -n "$FILE" ]
 then
    echo "Configure finished. Rebooting!!!"
    sleep 1
-   /opt/RoPieee/sbin/reboot
+   systemctl reboot
 fi
 
 exit 0 
