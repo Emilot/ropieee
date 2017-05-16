@@ -84,6 +84,9 @@ stage2()
    # install RoonBridge
    $LIB/install_roonbridge
 
+   # and run the updates for the first time
+   /opt/RoPieee/sbin/run-updates
+
    # enable the web interface
    systemctl enable ropieee1-web
 

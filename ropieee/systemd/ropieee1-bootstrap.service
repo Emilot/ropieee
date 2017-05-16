@@ -4,8 +4,7 @@ Wants=network-online.target
 After=network-online.target
 
 [Service]
-Type=oneshot
-RemainAfterExit=yes
+Type=simple
 ExecStart=/bin/bash -c '/boot/RoPieee/bootstrap'
 StandardOutput=journal+console
 SyslogIdentifier=ropieee

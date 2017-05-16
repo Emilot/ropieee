@@ -2,7 +2,7 @@
 
 pkgname=ropieee
 pkgver=9
-pkgrel=2
+pkgrel=3
 arch=(any)
 url="https://github.com/RoPieee/"
 license=('MIT')
@@ -48,6 +48,5 @@ echo "package"
 
    # overruling some default services
    install -m0644 "../ropieee/systemd/ntpd.service"                 "${pkgdir}/etc/systemd/system"
-   install -m0644 "../ropieee/systemd/rescue.service"               "${pkgdir}/etc/systemd/system"
 }
 

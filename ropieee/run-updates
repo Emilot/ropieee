@@ -5,3 +5,4 @@
 echo "*** RoPieee: checking for updates..."
 pacman -Syu --needed <<< yes
 
+exit $?
