@@ -2,7 +2,7 @@
 
 pkgname=ropieee
 pkgver=9
-pkgrel=2
+pkgrel=3
 arch=(any)
 url="https://github.com/RoPieee/"
 license=('MIT')
@@ -31,6 +31,7 @@ echo "package"
    install -m0644 "../ropieee/journald.conf"                        "${pkgdir}/opt/RoPieee/conf"
    install -m0644 "../ropieee/ropieee.conf"                         "${pkgdir}/opt/RoPieee/conf"
    install -m0644 "../ropieee/sshd_config"                          "${pkgdir}/opt/RoPieee/conf"
+   install -m0644 "../ropieee/rescue.service"                       "${pkgdir}/opt/RoPieee/conf"
 
    install -m0755 "../ropieee/run-updates"                          "${pkgdir}/opt/RoPieee/sbin"
    install -m0755 "../ropieee/configure"                            "${pkgdir}/opt/RoPieee/sbin"
