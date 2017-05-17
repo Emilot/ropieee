@@ -7,8 +7,9 @@ post_install()
    then
       cat << _EOF_ > /etc/ropieee.conf
 rp_hostname=ropieee
-rp_reboottime=03:04
 rp_audio=usb
+rp_reboottime=03:04
+rp_timezone=Europe/Amsterdam
 _EOF_
    fi
 
@@ -60,6 +61,13 @@ pre_upgrade()
       rm /etc/systemd/system/ropieee-bootstrap.service 
       rm /etc/systemd/system/ropieee-update.service 
       rm /etc/systemd/system/ropieee-update.timer 
+   fi
+
+   # with version ? we added the timezone setting
+   # this means we need to add it if it does not exist
+   if [ $(grep -c timezone /etc/ropieee.conf ) -eq 0 ]
+   then
+      echo 'rp_timezone=Europe/Amsterdam' >> /etc/ropieee.conf
    fi
 }
 
