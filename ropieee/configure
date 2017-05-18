@@ -37,6 +37,14 @@ else
    $LIB/disable_usb_audio
 fi
 
+# configure timezone
+TIMEZONE="/usr/share/zoneinfo/${rp_timezone}"
+echo "configuring timezone"
+if [ -f $TIMEZONE ]
+then
+   ln -sf $TIMEZONE /etc/localtime
+fi
+
 systemctl daemon-reload
 
 # ok here we go!
