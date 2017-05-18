@@ -64,7 +64,7 @@ stage3()
    /boot/RoPieee/control_led running &
 
    wait_for_timesync
-   sleep 10
+   sleep 30
 
    . /etc/ropieee.conf
    shutdown -r $rp_reboottime
