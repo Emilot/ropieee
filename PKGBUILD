@@ -20,7 +20,6 @@ echo "package"
    install -d "${pkgdir}/opt/RoPieee/lib"
    install -d "${pkgdir}/etc/systemd/system"
 
-   install -m0755 "../ropieee/SETUP"                                "${pkgdir}/boot/RoPieee"
    install -m0755 "../ropieee/bootstrap"                            "${pkgdir}/boot/RoPieee"
    install -m0755 "../ropieee/control_led"                          "${pkgdir}/boot/RoPieee"
    install -m0755 "../ropieee/check_ntp_offset"                     "${pkgdir}/boot/RoPieee"
