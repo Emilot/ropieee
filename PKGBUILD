@@ -1,8 +1,8 @@
 # Maintainer: Harry ten Berge <htenberge@gmail.com>
 
 pkgname=ropieee
-pkgver=20170518
-pkgrel=2
+pkgver=20170519
+pkgrel=1
 arch=(any)
 url="https://github.com/RoPieee/"
 license=('MIT')
@@ -31,7 +31,6 @@ echo "package"
    install -m0644 "../ropieee/journald.conf"                        "${pkgdir}/opt/RoPieee/conf"
    install -m0644 "../ropieee/ropieee.conf"                         "${pkgdir}/opt/RoPieee/conf"
    install -m0644 "../ropieee/sshd_config"                          "${pkgdir}/opt/RoPieee/conf"
-   install -m0644 "../ropieee/rescue.service"                       "${pkgdir}/opt/RoPieee/conf"
 
    install -m0755 "../ropieee/run-updates"                          "${pkgdir}/opt/RoPieee/sbin"
    install -m0755 "../ropieee/configure"                            "${pkgdir}/opt/RoPieee/sbin"
@@ -49,5 +48,7 @@ echo "package"
 
    # overruling some default services
    install -m0644 "../ropieee/systemd/ntpd.service"                 "${pkgdir}/etc/systemd/system"
+   install -m0644 "../ropieee/systemd/ntpdate.service"              "${pkgdir}/etc/systemd/system"
+   install -m0644 "../ropieee/rescue.service"                       "${pkgdir}/etc/systemd/system"
 }
 

@@ -63,11 +63,18 @@ pre_upgrade()
       rm /etc/systemd/system/ropieee-update.timer 
    fi
 
-   # with version ? we added the timezone setting
+   # with version 20170516-1 we added the timezone setting
    # this means we need to add it if it does not exist
    if [ $(grep -c timezone /etc/ropieee.conf ) -eq 0 ]
    then
       echo 'rp_timezone=Europe/Amsterdam' >> /etc/ropieee.conf
+   fi
+
+   # with version 20170519-1 we moved the systemd rescue file to the package
+   # this means we first need to remove it
+   if [ "$prev_version" = "20170518-2" ]
+   then
+      rm /etc/systemd/system/rescue.timer
    fi
 }
 

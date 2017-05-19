@@ -121,7 +121,6 @@ stage0()
    echo 1 > $STAGE_PTR
 
    mkdir -p /boot/RoPieee/log
-   rm -f /boot/RoPieee/SETUP
 
    journalctl > /boot/RoPieee/log/stage0.log
    reboot
