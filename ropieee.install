@@ -74,7 +74,7 @@ pre_upgrade()
    # this means we first need to remove it
    if [ "$prev_version" = "20170518-2" ]
    then
-      rm /etc/systemd/system/rescue.timer
+      rm /etc/systemd/system/rescue.service
    fi
 }
 
@@ -102,3 +102,4 @@ post_upgrade()
    systemctl enable ropieee1-update.timer
    systemctl enable ropieee1-reboot.service
 }
+
