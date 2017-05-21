@@ -53,6 +53,15 @@ wait_for_timesync()
    done
 }
 
+detect_touchscreen()
+{
+  if [ $( lsmod | grep -c rpi_ft5406 ) -gt 0 ] && [ $( cat /proc/cmdline | grep -c bcm2708_fb ) -gt 0 ]
+  then
+     return 0
+  else
+     return 1
+  fi
+}
 
 stage3()
 {
@@ -86,6 +95,12 @@ stage2()
 
    # and run the updates for the first time
    /opt/RoPieee/sbin/run-updates
+
+   # let's see if we've got a touchscreen
+#   if detect_touchscreen
+#   then
+#      $LIB/install_touchscreen
+#   fi
 
    # enable the web interface
    systemctl enable ropieee1-web

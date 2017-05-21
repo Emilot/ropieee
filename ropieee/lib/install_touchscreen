@@ -1,0 +1,8 @@
+#!/bin/bash
+# $RP_BEGIN_HEADER$ --------------------------------------------
+#
+# Copyright (C) 2017 RoPieee
+#
+# $RP_END_HEADER$ ----------------------------------------------
+
+pacman -Syu xf86-video-fbturbo-git xorg-xinit libglvnd xorg-server <<< y

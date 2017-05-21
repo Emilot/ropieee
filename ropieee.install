@@ -10,6 +10,8 @@ rp_hostname=ropieee
 rp_audio=usb
 rp_reboottime=03:04
 rp_timezone=Europe/Amsterdam
+rp_touchscreen_detected=0
+rp_touchscreen_orientation=default
 _EOF_
    fi
 
