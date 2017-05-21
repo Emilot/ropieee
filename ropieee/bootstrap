@@ -97,10 +97,13 @@ stage2()
    /opt/RoPieee/sbin/run-updates
 
    # let's see if we've got a touchscreen
-#   if detect_touchscreen
-#   then
-#      $LIB/install_touchscreen
-#   fi
+   if detect_touchscreen
+   then
+      cat /etc/ropieee.conf |
+      sed -e 's/^rp_touchscreen_detected=.*$/rp_touchscreen_detected=1/' > /tmp/ropieee.conf.$$
+      cp /tmp/ropieee.conf.$$ /etc/ropieee.conf
+      $LIB/install_touchscreen
+   fi
 
    # enable the web interface
    systemctl enable ropieee1-web
