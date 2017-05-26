@@ -5,4 +5,4 @@
 #
 # $RP_END_HEADER$ ----------------------------------------------
 
-pacman -Syu xf86-video-fbturbo-git xorg-xinit libglvnd xorg-server <<< y
+pacman -Syu ropieee-touchui <<< y

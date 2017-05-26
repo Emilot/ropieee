@@ -1,8 +1,8 @@
 # Maintainer: Harry ten Berge <htenberge@gmail.com>
 
 pkgname=ropieee
-pkgver=20170519
-pkgrel=2
+pkgver=20170526
+pkgrel=1
 arch=(any)
 url="https://github.com/RoPieee/"
 license=('MIT')
@@ -38,6 +38,8 @@ echo "package"
    install -m0755 "../ropieee/lib/disable_usb_audio"                "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/enable_usb_audio"                 "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/install_roonbridge"               "${pkgdir}/opt/RoPieee/lib"
+   install -m0755 "../ropieee/lib/touchscreen_on"                   "${pkgdir}/opt/RoPieee/lib"
+   install -m0755 "../ropieee/lib/touchscreen_off"                  "${pkgdir}/opt/RoPieee/lib"
 
    install -m0644 "../ropieee/systemd/ropieee1-bootstrap.service"   "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/systemd/ropieee1-update.service"      "${pkgdir}/etc/systemd/system"
@@ -48,7 +50,6 @@ echo "package"
    # overruling some default services
    install -m0644 "../ropieee/systemd/ntpd.service"                 "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/systemd/ntpdate.service"              "${pkgdir}/etc/systemd/system"
-# this one needs to sit out a few releases; it's being removed from the filesystem in the .install
-#   install -m0644 "../ropieee/rescue.service"                       "${pkgdir}/etc/systemd/system"
+   install -m0644 "../ropieee/rescue.service"                       "${pkgdir}/etc/systemd/system"
 }
 
