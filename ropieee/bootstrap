@@ -68,6 +68,9 @@ stage3()
    # we're done. this is business as usual
    echo " **** RoPieee RUNNING ****"
 
+   # disable HDMI
+   /opt/vc/bin/tvservice -o
+
    # change led control
    systemctl stop ropieee1-led
    /boot/RoPieee/control_led running &
