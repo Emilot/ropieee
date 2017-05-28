@@ -5,4 +5,5 @@
 #
 # $RP_END_HEADER$ ----------------------------------------------
 
-pacman -Syu ropieee-touchui <<< y
+# for now we disable this
+# pacman -Syu ropieee-touchui <<< y

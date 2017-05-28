@@ -99,6 +99,7 @@ stage2()
    # let's see if we've got a touchscreen
    if detect_touchscreen
    then
+      echo "Touchscreen detected!"
       cat /etc/ropieee.conf |
       sed -e 's/^rp_touchscreen_detected=.*$/rp_touchscreen_detected=1/' > /tmp/ropieee.conf.$$
       cp /tmp/ropieee.conf.$$ /etc/ropieee.conf

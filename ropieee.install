@@ -8,6 +8,7 @@ post_install()
       cat << _EOF_ > /etc/ropieee.conf
 rp_hostname=ropieee
 rp_audio=usb
+rp_audio_usb=1
 rp_reboottime=03:04
 rp_timezone=Europe/Amsterdam
 rp_touchscreen_detected=0
