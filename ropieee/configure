@@ -26,14 +26,20 @@ fi
 echo $rp_hostname > /etc/hostname
 
 # configure audio
-if [ "$rp_audio" = "usb" ]
+if [ "$rp_audio" = "ropieee-no-hat" ]
 then
-   echo "configuring USB audio"
+   echo "no audio HAT configured"
    sed -i '/dtoverlay=/d' /boot/config.txt
-   $LIB/enable_usb_audio
 else
    echo "configuring audio HAT $rp_audio"
    echo -e "\ndtoverlay=$rp_audio" >> /boot/config.txt
+fi
+
+if [ "$rp_audio_usb" = "1" ]
+then
+   echo "configuring USB audio"
+   $LIB/enable_usb_audio
+else
    $LIB/disable_usb_audio
 fi
 
