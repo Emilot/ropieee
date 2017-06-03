@@ -13,6 +13,7 @@ rp_reboottime=03:04
 rp_timezone=Europe/Amsterdam
 rp_touchscreen_detected=0
 rp_touchscreen_orientation=default
+rp_touchscreen_zone=unknown
 _EOF_
    fi
 
