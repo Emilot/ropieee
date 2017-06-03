@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sed -i '/display_rotate=/d' /boot/config.txt

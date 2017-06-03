@@ -57,6 +57,13 @@ then
    echo "configuring touchscreen"
 
    sed -i 's/ROON_DEFAULT_ZONE=.*/ROON_DEFAULT_ZONE='$rp_touchscreen_zone/ /opt/RoPieee/remote/environment.conf
+
+   if [ "$rp_touchscreen_orientation" = "rotated" ]
+   then
+	$LIB/set_touchscreen_orient_rotated
+   else
+	$LIB/set_touchscreen_orient_default
+   fi
 fi
 
 systemctl daemon-reload
