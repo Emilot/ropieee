@@ -51,6 +51,14 @@ then
    ln -sf $TIMEZONE /etc/localtime
 fi
 
+# configure touchscreen
+if [ "$rp_touchscreen_detected" = "1" ]
+then
+   echo "configuring touchscreen"
+
+   sed -i 's/ROON_DEFAULT_ZONE=.*/ROON_DEFAULT_ZONE='$rp_touchscreen_zone/ /opt/RoPieee/remote/environment.conf
+fi
+
 systemctl daemon-reload
 
 # ok here we go!
