@@ -1,4 +1,4 @@
 #!/bin/bash
 
-sed -i '/display_rotate=/d' /boot/config.txt
-echo 'display_rotate=2' >> /boot/config.txt
+sed -i '/lcd_rotate=/d' /boot/config.txt
+echo 'lcd_rotate=2' >> /boot/config.txt
