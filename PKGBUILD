@@ -2,7 +2,7 @@
 
 pkgname=ropieee
 pkgver=20170605
-pkgrel=1
+pkgrel=2
 arch=(any)
 url="https://github.com/RoPieee/"
 license=('MIT')
@@ -42,6 +42,9 @@ echo "package"
    install -m0755 "../ropieee/lib/install_touchscreen"                  "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/touchscreen_on"                       "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/touchscreen_off"                      "${pkgdir}/opt/RoPieee/lib"
+   install -m0755 "../ropieee/lib/set_touchscreen_orient_default"       "${pkgdir}/opt/RoPieee/lib"
+   install -m0755 "../ropieee/lib/set_touchscreen_orient_rotated"       "${pkgdir}/opt/RoPieee/lib"
+
 
    install -m0644 "../ropieee/systemd/ropieee1-bootstrap.service"       "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/systemd/ropieee1-update.service"          "${pkgdir}/etc/systemd/system"
