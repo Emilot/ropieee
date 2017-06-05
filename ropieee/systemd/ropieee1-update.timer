@@ -1,8 +1,9 @@
 [Unit]
-Description=Run ropieee-update on every boot
+Description=Run RoPieee-update on 4hrs interval
 
 [Timer]
 OnBootSec=15min
+OnUnitActiveSec=4h
 
 [Install]
 WantedBy=timers.target
