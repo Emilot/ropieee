@@ -64,6 +64,12 @@ then
    else
 	$LIB/set_touchscreen_orient_default
    fi
+
+   # enable the touchscreen only when the default zone has been set
+   if [ "$rp_touchscreen_zone" != "unknown" ]
+   then
+      systemctl enable ropieee-touchui
+   fi
 fi
 
 systemctl daemon-reload

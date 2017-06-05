@@ -7,5 +7,5 @@
 
 pacman -Syu libglvnd ropieee-touchui <<< y
 systemctl enable ropieee-remote
-systemctl enable ropieee-touchui
+#systemctl enable ropieee-touchui
 
