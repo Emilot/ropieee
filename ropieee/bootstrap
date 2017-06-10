@@ -66,6 +66,10 @@ detect_touchscreen()
 stage3()
 {
    # we're done. this is business as usual
+
+   # just to be sure.
+   rm -f /var/lib/pacman/db.lck
+
    echo " **** RoPieee RUNNING ****"
 
    # disable HDMI
