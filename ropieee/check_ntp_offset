@@ -8,6 +8,8 @@ then
 fi
 
 offsets=$(ntpq -pn 127.0.0.1 2>&1 | tail -n +3 | cut -c 62-66 | tr -d '-')
+test -z "$offsets" && exit 1 
+
 for offset in ${offsets}; do
     if [ ${offset:-0} -ge ${limit:-100} ]; then
         echo "*** RoPieee: an NTPD offset is excessive - Please investigate"
@@ -15,6 +17,6 @@ for offset in ${offsets}; do
     fi  
 done
 
-echo "*** RoPieee: NTPD ok"
+echo "*** RoPieee: NTPD OK ***"
 exit 0
 
