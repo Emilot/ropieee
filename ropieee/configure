@@ -43,6 +43,12 @@ else
    $LIB/disable_usb_audio
 fi
 
+# disable onboard audio
+if [ $( grep -c 'dtparam=audio=off' /boot/config.txt ) -eq 0 ]
+then
+   echo "dtparam=audio=off" >> /boot.config.txt
+fi
+
 # configure timezone
 TIMEZONE="/usr/share/zoneinfo/${rp_timezone}"
 echo "configuring timezone"
@@ -56,7 +62,7 @@ if [ "$rp_touchscreen_detected" = "1" ]
 then
    echo "configuring touchscreen"
 
-   sed -i 's/ROON_DEFAULT_ZONE=.*/ROON_DEFAULT_ZONE='$rp_touchscreen_zone/ /opt/RoPieee/remote/environment.conf
+   sed -i 's/ROON_DEFAULT_ZONE=.*/ROON_DEFAULT_ZONE='$rp_touchscreen_zone/ /etc/ropieee-remote.conf
 
    if [ "$rp_touchscreen_orientation" = "rotated" ]
    then
