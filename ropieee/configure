@@ -43,6 +43,12 @@ else
    $LIB/disable_usb_audio
 fi
 
+# disable onboard audio
+if [ $( grep -c 'dtparam=audio=off' /boot/config.txt ) -eq 0 ]
+then
+   echo "dtparam=audio=off" >> /boot.config.txt
+fi
+
 # configure timezone
 TIMEZONE="/usr/share/zoneinfo/${rp_timezone}"
 echo "configuring timezone"

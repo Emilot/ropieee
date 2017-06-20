@@ -10,6 +10,7 @@ rp_hostname=ropieee
 rp_audio=ropieee-no-hat
 rp_audio_usb=1
 rp_reboottime=03:04
+rp_auto_update=1
 rp_timezone=Europe/Amsterdam
 rp_touchscreen_detected=0
 rp_touchscreen_orientation=default
