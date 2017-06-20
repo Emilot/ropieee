@@ -15,8 +15,6 @@ do
    i=$( expr $i + 1 )
 done
 
-exit $?
-
 systemctl enable ropieee-remote
 systemctl enable ropieee-touchui
 
