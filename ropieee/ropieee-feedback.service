@@ -1,0 +1,12 @@
+[Unit]
+Description=RoPieee send feedback
+DefaultDependencies=no
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/RoPieee/sbin/send-feedback
+
+[Install]
+WantedBy=multi-user.target
+
