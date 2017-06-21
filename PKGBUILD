@@ -35,6 +35,7 @@ echo "package"
    install -m0755 "../ropieee/run-updates"                              "${pkgdir}/opt/RoPieee/sbin"
    install -m0755 "../ropieee/configure"                                "${pkgdir}/opt/RoPieee/sbin"
    install -m0755 "../ropieee/reboot"                                   "${pkgdir}/opt/RoPieee/sbin"
+   install -m0755 "../ropieee/send-feedback"                            "${pkgdir}/opt/RoPieee/sbin"
 
    install -m0755 "../ropieee/lib/disable_usb_audio"                    "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/enable_usb_audio"                     "${pkgdir}/opt/RoPieee/lib"
@@ -51,6 +52,7 @@ echo "package"
    install -m0644 "../ropieee/systemd/ropieee1-update.timer"            "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/systemd/ropieee1-reboot.service"          "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/systemd/ropieee1-led.service"             "${pkgdir}/etc/systemd/system"
+   install -m0644 "../ropieee/systemd/ropieee-feedback.service"         "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/systemd/ropieee-roonbridge-override.conf" "${pkgdir}/etc/systemd/system/roonbridge.service.d"
 
    # overruling some default services
