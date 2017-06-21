@@ -1,7 +1,7 @@
 #!/bin/bash
 
 FTP_USER="ropieee"
-FTP_PASS="iRxAhwGl1Er6"
+FTP_PASS="v^8DMcaDc2A7"
 FTP_ADDR="www.ropieee.org/sda1/ropieee/"
 
 tmpdir=$( mktemp -d /tmp/feedback_XXXXX )
