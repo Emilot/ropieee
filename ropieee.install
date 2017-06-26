@@ -42,6 +42,9 @@ _EOF_
    # only volatile logging
    cp $CONF/journald.conf /etc/systemd
 
+   # systemd resolved configuration
+   cp $CONF/resolved.conf /etc/systemd
+
    # reload systemd
    systemctl daemon-reload
 
@@ -85,6 +88,8 @@ pre_upgrade()
 
 post_upgrade()
 {
+   CONF=/opt/RoPieee/conf
+
    # get the package versions
    new_version=$1
    prev_version=$2
@@ -106,5 +111,11 @@ post_upgrade()
    systemctl enable ropieee1-led.service
    systemctl enable ropieee1-update.timer
    systemctl enable ropieee1-reboot.service
+
+
+   # fix resolved. this is part of the installation (see above), so this can be removed later
+   cp $CONF/resolved.conf /etc/systemd
+
+   systemctl daemon-reload
 }
 
