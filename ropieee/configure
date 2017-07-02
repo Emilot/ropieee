@@ -70,7 +70,7 @@ if [ "$rp_touchscreen_detected" = "1" ]
 then
    echo "configuring touchscreen"
 
-   sed -i 's/ROON_DEFAULT_ZONE=.*/ROON_DEFAULT_ZONE='$rp_touchscreen_zone/ /etc/ropieee-remote.conf
+   sed -i 's/ROON_DEFAULT_ZONE=.*/ROON_DEFAULT_ZONE='"$rp_touchscreen_zone"/ /etc/ropieee-remote.conf
 
    if [ "$rp_touchscreen_orientation" = "rotated" ]
    then
