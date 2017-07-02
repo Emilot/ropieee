@@ -17,9 +17,11 @@ fi
 
 if [ -n "$FILE" ]
 then
-   cp $FILE /etc/ropieee.conf
+   cat $FILE | sed s/\'// | sed s/\'// > /etc/ropieee.conf
+   #cp $FILE /etc/ropieee.conf
 fi
 
+# so let's load the new configuration
 . /etc/ropieee.conf
 
 # set the hostname
