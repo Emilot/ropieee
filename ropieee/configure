@@ -48,7 +48,7 @@ fi
 # disable onboard audio
 if [ $( grep -c 'dtparam=audio=off' /boot/config.txt ) -eq 0 ]
 then
-   echo "dtparam=audio=off" >> /boot.config.txt
+   echo "dtparam=audio=off" >> /boot/config.txt
 fi
 
 # configure boot delay
