@@ -93,6 +93,7 @@ if [ -n "$FILE" ]
 then
    echo "Configure finished. Rebooting!!!"
    sleep 1
+   sync; sync
    systemctl reboot
 fi
 
