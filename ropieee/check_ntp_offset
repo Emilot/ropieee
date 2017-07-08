@@ -2,21 +2,28 @@
 
 limit=1000   # Set your limit in milliseconds here
 
-if [ $( ntpq -pn 127.0.0.1 2>&1 | grep -c 'refused' ) -gt 0 ]
+
+
+ntpdate=$( systemctl status ntpdate >/dev/null; echo $? )
+ntpd=$( systemctl status ntpd >/dev/null; echo $? )
+
+if [ $ntpdate -eq 3 -a $ntpd -eq 0 ]
 then
+   offsets=$(ntpq -pn 127.0.0.1 2>&1 | tail -n +3 | cut -c 62-66 | tr -d '-')
+   test -z "$offsets" && exit 1 
+
+   for offset in ${offsets}; do
+      if [ ${offset:-0} -ge ${limit:-100} ]; then
+         echo "*** RoPieee: an NTPD offset is excessive - Please investigate"
+         exit 1  
+      fi  
+   done
+
+   echo "*** RoPieee: NTPD OK ***"
+   exit 0
+else
+   echo "*** RoPieee: NTPD still initialising ***"
    exit 1
 fi
 
-offsets=$(ntpq -pn 127.0.0.1 2>&1 | tail -n +3 | cut -c 62-66 | tr -d '-')
-test -z "$offsets" && exit 1 
-
-for offset in ${offsets}; do
-    if [ ${offset:-0} -ge ${limit:-100} ]; then
-        echo "*** RoPieee: an NTPD offset is excessive - Please investigate"
-        exit 1  
-    fi  
-done
-
-echo "*** RoPieee: NTPD OK ***"
-exit 0
-
+exit 1
