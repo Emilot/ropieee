@@ -70,20 +70,21 @@ stage3()
    # just to be sure.
    rm -f /var/lib/pacman/db.lck
 
-   echo " **** RoPieee RUNNING ****"
-
    # disable HDMI
    /opt/vc/bin/tvservice -o
+
+   # wait for NTP
+   wait_for_timesync
+   sleep 3
 
    # change led control
    systemctl stop ropieee1-led
    /boot/RoPieee/control_led running &
 
-   wait_for_timesync
-   sleep 30
-
    . /etc/ropieee.conf
    shutdown -r $rp_reboottime
+
+   echo " **** RoPieee RUNNING ****"
 
    # let's go to bed...
    while true
