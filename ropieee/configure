@@ -34,6 +34,7 @@ then
    sed -i '/dtoverlay=/d' /boot/config.txt
 else
    echo "configuring audio HAT $rp_audio"
+   sed -i '/dtoverlay=/d' /boot/config.txt
    echo -e "\ndtoverlay=$rp_audio" >> /boot/config.txt
 fi
 
