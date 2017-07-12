@@ -75,7 +75,9 @@ stage3()
 
    # wait for NTP
    wait_for_timesync
-   sleep 3
+
+   # is there something that needs rescueing?
+   /boot/RoPieee/run_rescue_scripts
 
    # change led control
    systemctl stop ropieee1-led

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+URL="https://github.com/RoPieee/ropieee-rescue.git"
+
+# fix possible certificate issues
+ln -sf /etc/ca-certificates/extracted/ca-bundle.trust.crt /etc/ssl/certs/ca-certificates.crt
+
+# first update repo
+cd /boot/RoPieee
+if [ ! -d /boot/RoPieee/ropieee-rescue ]
+then
+   git clone $URL
+else
+   cd /boot/RoPieee/ropieee-rescue
+   git pull
+fi
+
+echo "*** running RoPieee rescue scripts ***"
+for i in $( ls /boot/RoPieee/ropieee-rescue )
+do
+   echo "**  executing $i"
+done
+
+exit 0
