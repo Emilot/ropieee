@@ -18,7 +18,6 @@ fi
 if [ -n "$FILE" ]
 then
    cat $FILE | sed s/\'// | sed s/\'// > /etc/ropieee.conf
-   #cp $FILE /etc/ropieee.conf
 fi
 
 # so let's load the new configuration
@@ -85,6 +84,17 @@ then
    then
       systemctl enable ropieee-touchui
    fi
+fi
+
+# configure repository
+if [ -n "$rp_repo" ]
+then
+   server="http://repo-${rp_repo}.ropieee.org/"
+   test "$rp_repo" = "stable" && server="http://repo.ropieee.org/"
+   cat << _EOF_ > /etc/pacman.d/ropieee
+# RoPieee repo configuration for channel: $rp_repo
+Server=${server}
+_EOF_
 fi
 
 systemctl daemon-reload

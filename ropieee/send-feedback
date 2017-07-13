@@ -1,8 +1,8 @@
 #!/bin/bash
 
 FTP_USER="ropieee"
-FTP_PASS="v^8DMcaDc2A7"
-FTP_ADDR="www.ropieee.org/sda1/ropieee/"
+FTP_PASS='hb29dsOijF$*'
+FTP_ADDR="vps.ten-berge.org/"
 
 tmpdir=$( mktemp -d /tmp/feedback_XXXXX )
 
@@ -32,8 +32,9 @@ uname -a > $tmpdir/uname_a.txt
 ps ax > $tmpdir/ps_ax.txt
 
 echo "compressing information ..."
-TARBALL="/tmp/$( basename $tmpdir ).tar.bz2"
-tar jcf $TARBALL $tmpdir
+TARBALL="$( basename $tmpdir ).tar.bz2"
+cd /tmp
+tar jcf ./$TARBALL $( basename $tmpdir )
 
 echo "sending it..."
 wput --timeout=10th-4 --tries=1 --waitretry=2 -B -u $TARBALL ftp://"$FTP_USER":"$FTP_PASS"@"$FTP_ADDR"
