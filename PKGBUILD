@@ -1,7 +1,7 @@
 # Maintainer: Harry ten Berge <htenberge@gmail.com>
 
 pkgname=ropieee
-pkgver=20170627
+pkgver=20170712
 pkgrel=1
 arch=(any)
 url="https://github.com/RoPieee/"
@@ -25,6 +25,7 @@ echo "package"
    install -m0755 "../ropieee/bootstrap"                                "${pkgdir}/boot/RoPieee"
    install -m0755 "../ropieee/control_led"                              "${pkgdir}/boot/RoPieee"
    install -m0755 "../ropieee/check_ntp_offset"                         "${pkgdir}/boot/RoPieee"
+   install -m0755 "../ropieee/run_rescue_scripts"                       "${pkgdir}/boot/RoPieee"
 
    install -m0644 "../ropieee/99-blacklist.conf"                        "${pkgdir}/opt/RoPieee/conf"
    install -m0644 "../ropieee/alsa-base.conf"                           "${pkgdir}/opt/RoPieee/conf"
@@ -47,7 +48,6 @@ echo "package"
    install -m0755 "../ropieee/lib/touchscreen_off"                      "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/set_touchscreen_orient_default"       "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/set_touchscreen_orient_rotated"       "${pkgdir}/opt/RoPieee/lib"
-
 
    install -m0644 "../ropieee/systemd/ropieee1-bootstrap.service"       "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/systemd/ropieee1-update.service"          "${pkgdir}/etc/systemd/system"
