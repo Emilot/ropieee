@@ -110,6 +110,7 @@ pre_upgrade()
       then
          echo 'rp_repo=test' >> /etc/ropieee.conf
       elif [ $beta_repo -gt 0 ]
+      then
          echo 'rp_repo=beta' >> /etc/ropieee.conf
       else
          echo 'rp_repo=stable' >> /etc/ropieee.conf
