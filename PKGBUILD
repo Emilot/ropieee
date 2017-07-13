@@ -2,7 +2,7 @@
 
 pkgname=ropieee
 pkgver=20170714
-pkgrel=1
+pkgrel=2
 arch=(any)
 url="https://github.com/RoPieee/"
 license=('MIT')
@@ -19,11 +19,8 @@ echo "package"
    install -d "${pkgdir}/opt/RoPieee/sbin"
    install -d "${pkgdir}/opt/RoPieee/conf"
    install -d "${pkgdir}/opt/RoPieee/lib"
-   install -d "${pkgdir}/etc"
    install -d "${pkgdir}/etc/systemd/system"
    install -d "${pkgdir}/etc/systemd/system/roonbridge.service.d"
-
-   install -m0755 "../ropieee/pacman.conf"                              "${pkgdir}/etc"
 
    install -m0755 "../ropieee/bootstrap"                                "${pkgdir}/boot/RoPieee"
    install -m0755 "../ropieee/control_led"                              "${pkgdir}/boot/RoPieee"
@@ -36,6 +33,7 @@ echo "package"
    install -m0644 "../ropieee/ropieee.conf"                             "${pkgdir}/opt/RoPieee/conf"
    install -m0644 "../ropieee/sshd_config"                              "${pkgdir}/opt/RoPieee/conf"
    install -m0644 "../ropieee/resolved.conf"                            "${pkgdir}/opt/RoPieee/conf"
+   install -m0644 "../ropieee/pacman.conf"                              "${pkgdir}/opt/RoPieee/conf"
 
    install -m0755 "../ropieee/run-updates"                              "${pkgdir}/opt/RoPieee/sbin"
    install -m0755 "../ropieee/configure"                                "${pkgdir}/opt/RoPieee/sbin"
