@@ -2,6 +2,14 @@ post_install()
 {
    CONF=/opt/RoPieee/conf
 
+   # what kind of image is this?
+   if [ -f /root/ropieee_repo ]
+   then
+      ropieee_repo=$( cat /root/ropieee_repo )
+   else
+      ropieee_repo=stable
+   fi
+
    # setup initial config file
    if [ ! -f /etc/ropieee.conf ]
    then
@@ -15,6 +23,7 @@ rp_timezone=Europe/Amsterdam
 rp_touchscreen_detected=0
 rp_touchscreen_orientation=default
 rp_touchscreen_zone=unknown
+rp_repo=${ropieee_repo}
 _EOF_
    fi
 
@@ -84,6 +93,23 @@ pre_upgrade()
    then
       rm /etc/systemd/system/rescue.service
    fi
+
+   # upgrade: add repo variable 
+   if [ $( grep -c rp_repo /etc/ropieee.conf ) - eq 0 ]
+   then
+      # let's see if we can detect the current repo type
+      test_repo=$( grep -c '^\[ropieee-test\]' /etc/pacman.conf )
+      beta_repo=$( grep -c '^\[ropieee-beta\]' /etc/pacman.conf )
+
+      if [ $test_repo -gt 0 ]
+      then
+         echo 'rp_repo=test' >> /etc/ropieee.conf
+      elif [ $beta_repo -gt 0 ]
+         echo 'rp_repo=beta' >> /etc/ropieee.conf
+      else
+         echo 'rp_repo=stable' >> /etc/ropieee.conf
+      fi
+   fi
 }
 
 post_upgrade()
@@ -111,7 +137,6 @@ post_upgrade()
    systemctl enable ropieee1-led.service
    systemctl enable ropieee1-update.timer
    systemctl enable ropieee1-reboot.service
-
 
    # fix resolved. this is part of the installation (see above), so this can be removed later
    cp $CONF/resolved.conf /etc/systemd

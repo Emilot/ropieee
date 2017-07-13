@@ -1,7 +1,7 @@
 # Maintainer: Harry ten Berge <htenberge@gmail.com>
 
 pkgname=ropieee
-pkgver=20170627
+pkgver=20170714
 pkgrel=1
 arch=(any)
 url="https://github.com/RoPieee/"
@@ -19,8 +19,11 @@ echo "package"
    install -d "${pkgdir}/opt/RoPieee/sbin"
    install -d "${pkgdir}/opt/RoPieee/conf"
    install -d "${pkgdir}/opt/RoPieee/lib"
+   install -d "${pkgdir}/etc"
    install -d "${pkgdir}/etc/systemd/system"
    install -d "${pkgdir}/etc/systemd/system/roonbridge.service.d"
+
+   install -m0755 "../ropieee/pacman.conf"                              "${pkgdir}/etc"
 
    install -m0755 "../ropieee/bootstrap"                                "${pkgdir}/boot/RoPieee"
    install -m0755 "../ropieee/control_led"                              "${pkgdir}/boot/RoPieee"
@@ -47,7 +50,6 @@ echo "package"
    install -m0755 "../ropieee/lib/touchscreen_off"                      "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/set_touchscreen_orient_default"       "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/set_touchscreen_orient_rotated"       "${pkgdir}/opt/RoPieee/lib"
-
 
    install -m0644 "../ropieee/systemd/ropieee1-bootstrap.service"       "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/systemd/ropieee1-update.service"          "${pkgdir}/etc/systemd/system"
