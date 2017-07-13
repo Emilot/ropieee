@@ -89,10 +89,13 @@ fi
 # configure repository
 if [ -n "$rp_repo" ]
 then
+   repo="ropieee-${rp_repo}"
+   test "$rp_repo" = "stable" && repo="ropieee"
    server="http://repo-${rp_repo}.ropieee.org/"
    test "$rp_repo" = "stable" && server="http://repo.ropieee.org/"
    cat << _EOF_ > /etc/pacman.d/ropieee
 # RoPieee repo configuration for channel: $rp_repo
+[${repo}]
 Server=${server}
 _EOF_
 fi
