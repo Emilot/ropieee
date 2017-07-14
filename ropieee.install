@@ -115,9 +115,6 @@ pre_upgrade()
       else
          echo 'rp_repo=stable' >> /etc/ropieee.conf
       fi
-
-      # and replace the pacman.conf
-      cp $CONF/pacman.conf /etc
    fi
 }
 
@@ -134,6 +131,9 @@ post_upgrade()
    then
       echo 3 > /boot/RoPieee/.install_stage
    fi
+
+   # and replace the pacman.conf
+   cp $CONF/pacman.conf /etc
 
    # run configure
    /opt/RoPieee/sbin/configure
