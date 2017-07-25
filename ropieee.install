@@ -132,14 +132,12 @@ post_upgrade()
       echo 3 > /boot/RoPieee/.install_stage
    fi
 
-   # and replace the pacman.conf
+   # and replace some configuration files
    cp $CONF/pacman.conf /etc
+   cp $CONF/resolved.conf /etc/systemd
 
    # run configure
    /opt/RoPieee/sbin/configure
-
-   # reload systemd
-   systemctl daemon-reload
 
    # and enable the services of course (necessary for updates that introduce new services)
    systemctl enable ropieee1-bootstrap.service
@@ -147,9 +145,7 @@ post_upgrade()
    systemctl enable ropieee1-update.timer
    systemctl enable ropieee1-reboot.service
 
-   # fix resolved. this is part of the installation (see above), so this can be removed later
-   cp $CONF/resolved.conf /etc/systemd
-
+   # reload systemd
    systemctl daemon-reload
 }
 
