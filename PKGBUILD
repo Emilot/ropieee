@@ -1,13 +1,14 @@
 # Maintainer: Harry ten Berge <htenberge@gmail.com>
 
 pkgname=ropieee
-pkgver=20170725
+pkgver=20170727
 pkgrel=1
 arch=(any)
 url="https://github.com/RoPieee/"
 license=('MIT')
 depends=('usleep'
-         'wput')
+         'wput'
+	 'git')
 install=${pkgname}.install
 
 
