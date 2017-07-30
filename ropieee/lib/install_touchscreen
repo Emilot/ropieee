@@ -10,7 +10,7 @@ i=1
 while [ $i -le 5 ] 
 do
    echo "** install_touchscreen: attempt $i **"
-   pacman -Syu  libglvnd ropieee-touchui <<< y
+   pacman -Syu ropieee-touchui <<< y
    test $? -eq 0 && break
    i=$( expr $i + 1 )
 done
