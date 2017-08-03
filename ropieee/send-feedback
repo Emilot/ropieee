@@ -1,11 +1,20 @@
 #!/bin/bash
 
+UNIQUE=$1
+
 FTP_USER="ropieee"
 FTP_PASS='hb29dsOijF$*'
 FTP_ADDR="vps.ten-berge.org/"
 
-tmpdir=$( mktemp -d /tmp/feedback_XXXXX )
+if [ -z "$UNIQUE" ]
+then
+   tmpdir=$( mktemp -d /tmp/feedback_XXXXX )
+else
+   tmpdir=/tmp/feedback_${UNIQUE}
+   mkdir $tmpdir
+fi
 
+test -n "$UNIQUE" && echo "sending feedback with id $UNIQUE"
 echo "gathering information in $tmpdir ..."
 
 # add all logging
@@ -23,7 +32,7 @@ cp /etc/ropieee-remote.conf $tmpdir
 df -lh > $tmpdir/df_lh.txt
 
 # audio
-aplay -l > $tmpdir/aplay_l.txt
+aplay -l 2>&1 > $tmpdir/aplay_l.txt
 
 # kernel
 uname -a > $tmpdir/uname_a.txt
@@ -32,7 +41,8 @@ uname -a > $tmpdir/uname_a.txt
 ps ax > $tmpdir/ps_ax.txt
 
 # software
-pacman -Q | grep ropieee > $tmpdir/pacman_q.txt
+pacman -Q | grep ropieee >  $tmpdir/pacman_q.txt
+pacman -Q | grep qt5     >> $tmpdir/pacman_q.txt
 
 # repo
 cp /etc/pacman.d/ropieee $tmpdir/pacman_ropieee.txt
