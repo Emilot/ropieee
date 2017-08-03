@@ -56,7 +56,7 @@ echo "package"
    install -m0644 "../ropieee/systemd/ropieee1-update.timer"            "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/systemd/ropieee1-reboot.service"          "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/systemd/ropieee1-led.service"             "${pkgdir}/etc/systemd/system"
-   install -m0644 "../ropieee/systemd/ropieee-feedback@.service         "${pkgdir}/etc/systemd/system"
+   install -m0644 "../ropieee/systemd/ropieee-feedback@.service"        "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/systemd/ropieee-roonbridge-override.conf" "${pkgdir}/etc/systemd/system/roonbridge.service.d"
 
    # overruling some default services
