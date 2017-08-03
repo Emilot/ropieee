@@ -113,6 +113,10 @@ stage2()
       cat /etc/ropieee.conf |
       sed -e 's/^rp_touchscreen_detected=.*$/rp_touchscreen_detected=1/' > /tmp/ropieee.conf.$$
       cp /tmp/ropieee.conf.$$ /etc/ropieee.conf
+
+      # increase gpu mem
+      sed -i 's/gpu_mem=.*/gpu_mem=256/' /boot/config.txt
+
       $LIB/install_touchscreen
    fi
 
