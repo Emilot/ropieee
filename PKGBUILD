@@ -1,7 +1,7 @@
 # Maintainer: Harry ten Berge <htenberge@gmail.com>
 
 pkgname=ropieee
-pkgver=20170727
+pkgver=20170803
 pkgrel=1
 arch=(any)
 url="https://github.com/RoPieee/"
