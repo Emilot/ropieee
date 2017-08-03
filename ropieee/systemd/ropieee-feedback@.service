@@ -5,7 +5,8 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=/opt/RoPieee/sbin/send-feedback
+ExecStart=/opt/RoPieee/sbin/send-feedback %i
+SyslogIdentifier=ropieee-feedback
 
 [Install]
 WantedBy=multi-user.target
