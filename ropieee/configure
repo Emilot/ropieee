@@ -9,15 +9,26 @@ CONF=/opt/RoPieee/conf
 LIB=/opt/RoPieee/lib
 
 FILE=$1
+OPTION=$2
+
 if [ -n "$FILE" -a  ! -r "$FILE" ]
 then
-   echo "can't read file"
+   echo "can't read file $FILE"
    exit 1
 fi
 
 if [ -n "$FILE" ]
 then
    cat $FILE | sed s/\'// | sed s/\'// > /etc/ropieee.conf
+fi
+
+if [ -n "$OPTION" ]
+then
+   if [ "$OPTION" != "no_reboot" ]
+   then
+      echo "don't understand option $OPTION"
+      exit 1 
+   fi
 fi
 
 # so let's load the new configuration
@@ -103,7 +114,7 @@ fi
 systemctl daemon-reload
 
 # ok here we go!
-if [ -n "$FILE" ]
+if [ -n "$FILE" -z "$OPTION" ]
 then
    echo "Configure finished. Rebooting!!!"
    sleep 1
