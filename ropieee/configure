@@ -114,7 +114,7 @@ fi
 systemctl daemon-reload
 
 # ok here we go!
-if [ -n "$FILE" -z "$OPTION" ]
+if [ -n "$FILE" -a -z "$OPTION" ]
 then
    echo "Configure finished. Rebooting!!!"
    sleep 1
