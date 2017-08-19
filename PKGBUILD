@@ -50,6 +50,7 @@ echo "package"
    install -m0755 "../ropieee/lib/touchscreen_off"                      "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/set_touchscreen_orient_default"       "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/set_touchscreen_orient_rotated"       "${pkgdir}/opt/RoPieee/lib"
+   install -m0755 "../ropieee/lib/get_hardware_model"                   "${pkgdir}/opt/RoPieee/lib"
 
    install -m0644 "../ropieee/systemd/ropieee1-bootstrap.service"       "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/systemd/ropieee1-update.service"          "${pkgdir}/etc/systemd/system"
