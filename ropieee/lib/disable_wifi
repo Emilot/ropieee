@@ -1,0 +1,15 @@
+#!/bin/bash
+# $RP_BEGIN_HEADER$ --------------------------------------------
+#
+# Copyright (C) 2017 RoPieee
+#
+# $RP_END_HEADER$ ----------------------------------------------
+
+echo "blacklist brcmfmac" >  /etc/modprobe.d/99-ropieee-disable-wifi.conf
+echo "blacklist cfg80211" >> /etc/modprobe.d/99-ropieee-disable-wifi.conf
+
+rm -rf /etc/systemd/network/wlan0.network
+#rm -f /etc/modprobe.d/99-ropieee-enable-usb-audio.conf
+
+exit 0 
+

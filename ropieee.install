@@ -1,6 +1,7 @@
 post_install()
 {
    CONF=/opt/RoPieee/conf
+   LIB=/opt/RoPieee/lib
 
    # what kind of image is this?
    if [ -f /root/ropieee_repo ]
@@ -39,8 +40,20 @@ _EOF_
    # fix modprobe for usb devices
    cp $CONF/alsa-base.conf /etc/modprobe.d
 
-   # disable wifi
-   cp $CONF/99-blacklist.conf /etc/modprobe.d
+   # NETWORK: setup devices
+   cat << _EOF_ > /etc/systemd/network/eth0.network
+[Match]
+Name=eth0
+
+[Network]
+DHCP=yes
+
+[DHCP]
+RouteMetric=10
+_EOF_
+
+   # NETWORK: disable wifi
+   $LIB/disable_wifi
 
    # tune kernel params
    cp $CONF/ropieee.conf /etc/sysctl.d
