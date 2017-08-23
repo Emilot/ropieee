@@ -8,7 +8,7 @@ i=1
 while [ $i -le 5 ]
 do
    echo "** run-updates: attempt $i **"
-   pacman -Syu --needed <<< yes
+   yes | pacman -Syu --needed
    test $? -eq 0 && break
    i=$( expr $i + 1 )
 done
