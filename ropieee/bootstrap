@@ -48,11 +48,18 @@ expand_fs()
 
 wait_for_timesync()
 {
+   loop=1
    while true
    do
       /boot/RoPieee/check_ntp_offset
       test $? -eq 0 && return
       sleep 1
+      loop=$( expr $loop + 1 )
+      if [ $loop -gt 30 ]
+      then
+         systemctl restart ntpdate
+	 loop=1
+      fi
    done
 }
 
