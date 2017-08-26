@@ -63,6 +63,6 @@ echo "package"
    # overruling some default services
    install -m0644 "../ropieee/systemd/ntpd.service"                     "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/systemd/ntpdate.service"                  "${pkgdir}/etc/systemd/system"
-   install -m0644 "../ropieee/rescue.service"                           "${pkgdir}/etc/systemd/system"
+#   install -m0644 "../ropieee/rescue.service"                           "${pkgdir}/etc/systemd/system"
 }
 

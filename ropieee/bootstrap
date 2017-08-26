@@ -27,20 +27,23 @@ _EOF_
 expand_fs()
 {
    # Resize Filesystem to new partition size
-   #resize2fs /dev/mmcblk0p2
+   resize2fs /dev/mmcblk0p2
+
+   ### BELOW IS F2FS
+
 
    # for f2fs we can't resize a mounted fs, so we need to switch to rescue mode
-   cat << _EOF_ > /tmp/bbbootstrap
-umount /
-mount /boot
-resize.f2fs /dev/mmcblk0p2
-sleep 1
-echo 2 > /boot/RoPieee/.install_stage
-journalctl > /boot/RoPieee/log/stage1.log
-systemctl reboot
-_EOF_
+#   cat << _EOF_ > /tmp/bbbootstrap
+#umount /
+#mount /boot
+#resize.f2fs /dev/mmcblk0p2
+#sleep 1
+#echo 2 > /boot/RoPieee/.install_stage
+#journalctl > /boot/RoPieee/log/stage1.log
+#systemctl reboot
+#_EOF_
 
-   systemctl rescue
+#   systemctl rescue
 }
 
 wait_for_timesync()
@@ -138,7 +141,6 @@ stage1()
 
    expand_fs
 
-   # we're not coming here...
    echo 2 > $STAGE_PTR
 
    journalctl > /boot/RoPieee/log/stage1.log
