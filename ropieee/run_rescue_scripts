@@ -19,6 +19,7 @@ echo "*** running RoPieee rescue scripts ***"
 for i in $( ls /boot/RoPieee/ropieee-rescue )
 do
    echo "**  executing $i"
+   /boot/RoPieee/ropieee-rescue/${i}
 done
 
 exit 0
