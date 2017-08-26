@@ -9,6 +9,8 @@ if [[ "$REVISION_CODE" = "a020a0" ||
       "$REVISION_CODE" = "a22082" ||
       "$REVISION_CODE" = "a32082" ]]
 then
-   echo "detected Raspberry Pi model 3"
    MODEL="rpi3"
 fi 
+
+echo "$MODEL"
+exit 0
