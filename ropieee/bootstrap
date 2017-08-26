@@ -83,6 +83,15 @@ stage3()
    # disable HDMI
    /opt/vc/bin/tvservice -o
 
+   # make sure Roon logs to ram
+   rm -rf /var/roon/RAATServer/Logs
+   mkdir /tmp/raatserver_log
+   ln -s /tmp/raatserver_log /var/roon/RAATServer/Logs
+
+   rm -rf /var/roon/RoonBridge/Logs
+   mkdir /tmp/roonbridge_log
+   ln -s /tmp/roonbridge_log /var/roon/RoonBridge/Logs
+
    # wait for NTP
    wait_for_timesync
 
