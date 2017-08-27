@@ -1,0 +1,12 @@
+#!/bin/bash
+# $RP_BEGIN_HEADER$ --------------------------------------------
+#
+# Copyright (C) 2017 RoPieee
+#
+# $RP_END_HEADER$ ----------------------------------------------
+
+CHECKUPDATES_DB=/tmp/fakedb checkupdates > /tmp/updates.$$ 
+
+test $( grep -c ropieee-version /tmp/updates.$$ ) -gt 0 && exit 0 
+
+exit 1
