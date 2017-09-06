@@ -1,0 +1,35 @@
+#!/bin/bash
+# $RP_BEGIN_HEADER$ --------------------------------------------
+#
+# Copyright (C) 2017 RoPieee
+#
+# $RP_END_HEADER$ ----------------------------------------------
+
+# we only support wifi on the rpi3
+test "$( /opt/RoPieee/lib/get_hardware_model )" != "rpi3" && exit 1 
+
+# remove module blacklist
+rm -f /etc/modprobe.d/99-ropieee-disable-wifi.conf
+
+# create networked configuration
+cat << _EOF_ > /etc/systemd/network/wlan0.network
+[Match]
+Name=wlan0
+
+[Network]
+DHCP=yes
+
+[DHCP]
+RouteMetric=20
+_EOF_
+
+systemctl daemon-reload
+
+# insert modules
+modprobe brcmfmac
+
+# restart networking
+systemctl restart systemd-networkd
+
+exit 0
+

@@ -8,8 +8,10 @@
 echo "blacklist brcmfmac" >  /etc/modprobe.d/99-ropieee-disable-wifi.conf
 echo "blacklist cfg80211" >> /etc/modprobe.d/99-ropieee-disable-wifi.conf
 
-rm -rf /etc/systemd/network/wlan0.network
-#rm -f /etc/modprobe.d/99-ropieee-enable-usb-audio.conf
+rm -f /etc/systemd/network/wlan0.network
+systemctl daemon-reload
+systemctl restart systemd-networkd
+rmmod brcmfmac 2>/dev/null
 
 exit 0 
 
