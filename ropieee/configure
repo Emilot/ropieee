@@ -19,7 +19,7 @@ fi
 
 if [ -n "$FILE" ]
 then
-   cat $FILE | sed s/\'// | sed s/\'// > /etc/ropieee.conf
+   cat $FILE | tr -d \' > /etc/ropieee.conf
 fi
 
 if [ -n "$OPTION" ]
