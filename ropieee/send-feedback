@@ -29,7 +29,7 @@ cp /etc/ropieee.conf $tmpdir
 cp /etc/ropieee-remote.conf $tmpdir
 
 # disk usage
-df -lh > $tmpdir/df_lh.txt
+df -lhT > $tmpdir/df_lh.txt
 
 # audio
 aplay -l 2>&1 > $tmpdir/aplay_l.txt
