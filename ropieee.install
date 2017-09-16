@@ -136,6 +136,7 @@ pre_upgrade()
       echo 'rp_network_wired_method=dhcp'     >> /etc/ropieee.conf
       echo 'rp_network_wired_ipaddr=unknown'  >> /etc/ropieee.conf
       echo 'rp_network_wired_netmask=unknown' >> /etc/ropieee.conf
+      echo 'rp_network_wired_gateway=unknown' >> /etc/ropieee.conf
    fi
 }
 

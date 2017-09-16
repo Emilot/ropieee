@@ -109,6 +109,45 @@ Server=${server}
 _EOF_
 fi
 
+# configure network: wired
+if [ "$rp_network_wired_method" = "dhcp" ]
+then
+  rm -rf /etc/systemd/network/eth0.network
+  rm -rf /etc/systemd/network/wired.network
+  cat << _EOF_ > /etc/systemd/network/wired.network
+[Match]
+Name=eth0
+
+[Network]
+DHCP=ipv4
+
+[DHCP]
+RouteMetric=10
+_EOF_
+fi
+
+if [ "$rp_network_wired_method" = "static" ]
+then
+  rm -rf /etc/systemd/network/eth0.network
+  rm -rf /etc/systemd/network/wired.network
+
+  # first we need to convert the address to CIDR format
+  ipaddr=$( ipcalc -b ${rp_network_wired_ipaddr}/${rp_network_wired_netmask} | grep Netmask | cut -d '=' -f 2 )
+  ipaddr="$( set -- $ipaddr )"
+
+  cat << _EOF_ > /etc/systemd/network/wired.network
+[Match]
+Name=eth0
+
+[Network]
+Address=${ipaddr}
+
+[Route]
+Gateway=${rp_network_wired_gateway}
+Metric=10
+_EOF_
+fi
+
 systemctl daemon-reload
 
 # ok here we go!
