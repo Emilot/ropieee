@@ -1,7 +1,7 @@
 # Maintainer: Harry ten Berge <htenberge@gmail.com>
 
 pkgname=ropieee
-pkgver=20170828
+pkgver=20170916
 pkgrel=1
 arch=(any)
 url="https://github.com/RoPieee/"
@@ -10,7 +10,8 @@ depends=('ropieee-version'
 	 'fakeroot'
 	 'usleep'
          'wput'
-	 'git')
+	 'git'
+	 'ipcalc')
 install=${pkgname}.install
 
 
