@@ -129,6 +129,14 @@ pre_upgrade()
          echo 'rp_repo=stable' >> /etc/ropieee.conf
       fi
    fi
+
+   # upgrade: add network configuration parameters
+   if [ $( grep -c rp_network_wired_method /etc/ropieee.conf ) -eq 0 ]
+   then
+      echo 'rp_network_wired_method=dhcp'     >> /etc/ropieee.conf
+      echo 'rp_network_wired_ipaddr=unknown'  >> /etc/ropieee.conf
+      echo 'rp_network_wired_netmask=unknown' >> /etc/ropieee.conf
+   fi
 }
 
 post_upgrade()
