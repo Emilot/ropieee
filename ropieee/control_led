@@ -4,6 +4,15 @@ arg1=$1
 
 echo none > /sys/class/leds/led0/trigger
 
+_usleep()
+{
+   i=0
+   while [ $i -lt 20 ]
+   do
+      i=$( expr $i + 1 )
+   done
+}
+
 running()
 {
    while true
@@ -20,9 +29,9 @@ installation()
    while true
    do
       echo 1 >/sys/class/leds/led0/brightness
-      usleep 100000
+      _usleep
       echo 0 >/sys/class/leds/led0/brightness
-      usleep 100000
+      _usleep
    done
 }
 
