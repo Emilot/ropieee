@@ -12,12 +12,12 @@ test "$( /opt/RoPieee/lib/get_hardware_model )" != "rpi3" && exit 1
 rm -f /etc/modprobe.d/99-ropieee-disable-wifi.conf
 
 # create networked configuration
-cat << _EOF_ > /etc/systemd/network/wlan0.network
+cat << _EOF_ > /etc/systemd/network/wireless.network
 [Match]
 Name=wlan0
 
 [Network]
-DHCP=yes
+DHCP=ipv4
 
 [DHCP]
 RouteMetric=20
