@@ -1,5 +1,5 @@
 [Unit]
-Description=Run RoPieee-update on 4hrs interval
+Description=Run RoPieee-update
 
 [Timer]
 OnBootSec=15min

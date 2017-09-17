@@ -168,8 +168,8 @@ post_upgrade()
    # and enable the services of course (necessary for updates that introduce new services)
    systemctl enable ropieee1-bootstrap.service
    systemctl enable ropieee1-led.service
-   systemctl enable ropieee1-update.timer
    systemctl enable ropieee1-reboot.service
+   systemctl enable ropieee-update.timer
 
    # reload systemd
    systemctl daemon-reload
