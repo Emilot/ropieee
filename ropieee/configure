@@ -37,6 +37,48 @@ fi
 # set the hostname
 echo $rp_hostname > /etc/hostname
 
+
+
+### FUNCTIONS
+config_update_scenario()
+{
+   echo "*** configure: setting update scenario to ${rp_auto_update}"
+
+   if [ "${rp_auto_update}" = "daily" ]
+   then
+      cat << _EOF_ > /etc/systemd/system/ropieee-update.timer.d/ropieee-update-override.conf
+[Timer]
+OnBootSec=15min
+_EOF_
+      systemctl enable ropieee-update.timer
+      systemctl start ropieee-update.timer
+   elif [ "${rp_auto_update}" = "weekly" ]
+   then
+      trigger_date=$( date '+%F %T' -d "+1 week" )
+      cat << _EOF_ > /etc/systemd/system/ropieee-update.timer.d/ropieee-update-override.conf
+[Timer]
+OnCalendar=${trigger_date}
+_EOF_
+      systemctl enable ropieee-update.timer
+      systemctl start ropieee-update.timer
+   elif [ "${rp_auto_update}" = "monthly" ]
+   then
+      trigger_date=$( date '+%F %T' -d "+1 month" )
+      cat << _EOF_ > /etc/systemd/system/ropieee-update.timer.d/ropieee-update-override.conf
+[Timer]
+OnCalendar=${trigger_date}
+_EOF_
+      systemctl enable ropieee-update.timer
+      systemctl start ropieee-update.timer
+   elif [ "${rp_auto_update}" = "manual" ]
+   then
+      systemctl disable ropieee-update.timer
+      systemctl stop ropieee-update.timer
+   fi
+}
+
+
+
 # configure audio
 echo "*** configure: setting up audio"
 if [ "$rp_audio" = "ropieee-no-hat" ]
@@ -149,6 +191,8 @@ Gateway=${rp_network_wired_gateway}
 Metric=10
 _EOF_
 fi
+
+config_update_scenario
 
 systemctl daemon-reload
 
