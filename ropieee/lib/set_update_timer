@@ -1,0 +1,41 @@
+#!/bin/bash
+# $RP_BEGIN_HEADER$ --------------------------------------------
+#
+# Copyright (C) 2017 RoPieee
+#
+# $RP_END_HEADER$ ----------------------------------------------
+
+. /etc/ropieee.conf
+
+if [ "${rp_auto_update}" = "daily" ]
+then
+   cat << _EOF_ > /etc/systemd/system/ropieee-update.timer.d/ropieee-update-override.conf
+[Timer]
+OnBootSec=15min
+_EOF_
+   systemctl enable ropieee-update.timer
+   systemctl start ropieee-update.timer
+elif [ "${rp_auto_update}" = "weekly" ]
+then
+   trigger_date=$( date '+%F %T' -d "+1 week" )
+   cat << _EOF_ > /etc/systemd/system/ropieee-update.timer.d/ropieee-update-override.conf
+[Timer]
+OnCalendar=${trigger_date}
+_EOF_
+   systemctl enable ropieee-update.timer
+   systemctl start ropieee-update.timer
+elif [ "${rp_auto_update}" = "monthly" ]
+then
+   trigger_date=$( date '+%F %T' -d "+1 month" )
+   cat << _EOF_ > /etc/systemd/system/ropieee-update.timer.d/ropieee-update-override.conf
+[Timer]
+OnCalendar=${trigger_date}
+_EOF_
+   systemctl enable ropieee-update.timer
+   systemctl start ropieee-update.timer
+elif [ "${rp_auto_update}" = "manual" ]
+then
+   systemctl disable ropieee-update.timer
+   systemctl stop ropieee-update.timer
+fi
+
