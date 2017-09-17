@@ -74,6 +74,13 @@ _EOF_
    # pacman configuration
    cp $CONF/pacman.conf /etc
 
+   # prepare RoPieee's update mechanism
+   mkdir /etc/systemd/system/ropieee-update.timer.d
+   cat << _EOF_ > /etc/systemd/system/ropieee-update.timer.d/ropieee-update-override.conf
+[Timer]
+OnBootSec=15min
+_EOF_
+
    # reload systemd
    systemctl daemon-reload
 
