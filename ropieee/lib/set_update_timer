@@ -13,8 +13,6 @@ then
 [Timer]
 OnBootSec=15min
 _EOF_
-   systemctl enable ropieee-update.timer
-   systemctl start ropieee-update.timer
 elif [ "${rp_auto_update}" = "weekly" ]
 then
    trigger_date=$( date '+%F %T' -d "+1 week" )
@@ -22,8 +20,6 @@ then
 [Timer]
 OnCalendar=${trigger_date}
 _EOF_
-   systemctl enable ropieee-update.timer
-   systemctl start ropieee-update.timer
 elif [ "${rp_auto_update}" = "monthly" ]
 then
    trigger_date=$( date '+%F %T' -d "+1 month" )
@@ -31,11 +27,17 @@ then
 [Timer]
 OnCalendar=${trigger_date}
 _EOF_
-   systemctl enable ropieee-update.timer
-   systemctl start ropieee-update.timer
 elif [ "${rp_auto_update}" = "manual" ]
 then
    systemctl disable ropieee-update.timer
    systemctl stop ropieee-update.timer
 fi
 
+if [ "${rp_auto_update}" != "manual" ]
+then
+   systemctl daemon-reload
+   systemctl enable ropieee-update.timer
+   systemctl start ropieee-update.timer
+fi	
+
+exit 0

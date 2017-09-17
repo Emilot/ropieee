@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # this script checks for updates
+LIB="/opt/RoPieee/lib"
 
 echo "*** RoPieee: checking for updates..."
 
@@ -12,5 +13,11 @@ do
    test $? -eq 0 && break
    i=$( expr $i + 1 )
 done
+
+# if we're actually already running then we need to (re)set the timer
+if systemctl is-enabled ropieee-update.timer
+then
+   $LIB/set_update_timer
+fi
 
 exit $?

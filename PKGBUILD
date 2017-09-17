@@ -1,7 +1,7 @@
 # Maintainer: Harry ten Berge <htenberge@gmail.com>
 
 pkgname=ropieee
-pkgver=20170916
+pkgver=20170917
 pkgrel=1
 arch=(any)
 url="https://github.com/RoPieee/"
@@ -56,6 +56,7 @@ echo "package"
    install -m0755 "../ropieee/lib/set_touchscreen_orient_rotated"       "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/get_hardware_model"                   "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/check_for_updates"                    "${pkgdir}/opt/RoPieee/lib"
+   install -m0755 "../ropieee/lib/set_update_timer"                     "${pkgdir}/opt/RoPieee/lib"
 
    install -m0644 "../ropieee/systemd/ropieee1-bootstrap.service"       "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/systemd/ropieee-update.service"           "${pkgdir}/etc/systemd/system"
