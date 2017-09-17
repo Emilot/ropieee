@@ -38,19 +38,20 @@ fi
 echo $rp_hostname > /etc/hostname
 
 # configure audio
+echo "*** configure: setting up audio"
 if [ "$rp_audio" = "ropieee-no-hat" ]
 then
-   echo "no audio HAT configured"
+   echo " no audio HAT configured"
    sed -i '/dtoverlay=/d' /boot/config.txt
 else
-   echo "configuring audio HAT $rp_audio"
+   echo " configuring audio HAT $rp_audio"
    sed -i '/dtoverlay=/d' /boot/config.txt
    echo -e "\ndtoverlay=$rp_audio" >> /boot/config.txt
 fi
 
 if [ "$rp_audio_usb" = "1" ]
 then
-   echo "configuring USB audio"
+   echo " configuring USB audio"
    $LIB/enable_usb_audio
 else
    $LIB/disable_usb_audio
@@ -70,7 +71,7 @@ fi
 
 # configure timezone
 TIMEZONE="/usr/share/zoneinfo/${rp_timezone}"
-echo "configuring timezone"
+echo "*** configure: setting up timezone: ${rp_timezone}"
 if [ -f $TIMEZONE ]
 then
    ln -sf $TIMEZONE /etc/localtime
@@ -79,7 +80,7 @@ fi
 # configure touchscreen
 if [ "$rp_touchscreen_detected" = "1" ]
 then
-   echo "configuring touchscreen"
+   echo "*** configure: setting up touchscreen"
 
    sed -i 's/ROON_DEFAULT_ZONE=.*/ROON_DEFAULT_ZONE='"$rp_touchscreen_zone"/ /etc/ropieee-remote.conf
 
@@ -100,6 +101,7 @@ fi
 # configure repository
 if [ -n "$rp_repo" ]
 then
+   echo "*** configure: setting up repositories for channel: $rp_repo"
    repo="ropieee-${rp_repo}"
    server="http://repo-${rp_repo}.ropieee.org/"
    cat << _EOF_ > /etc/pacman.d/ropieee
@@ -110,6 +112,7 @@ _EOF_
 fi
 
 # configure network: wired
+echo "*** configure: setting up network"
 if [ "$rp_network_wired_method" = "dhcp" ]
 then
   rm -rf /etc/systemd/network/eth0.network
@@ -152,7 +155,7 @@ systemctl daemon-reload
 # ok here we go!
 if [ -n "$FILE" -a -z "$OPTION" ]
 then
-   echo "Configure finished. Rebooting!!!"
+   echo "*** configure finished. Rebooting!!!"
    sleep 1
    sync; sync
    systemctl reboot
