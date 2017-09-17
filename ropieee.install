@@ -19,12 +19,16 @@ rp_hostname=ropieee
 rp_audio=ropieee-no-hat
 rp_audio_usb=1
 rp_reboottime=03:04
-rp_auto_update=1
+rp_auto_update=daily
 rp_timezone=Europe/Amsterdam
 rp_touchscreen_detected=0
 rp_touchscreen_orientation=default
 rp_touchscreen_zone=unknown
 rp_repo=${ropieee_repo}
+rp_network_wired_method=dhcp
+rp_network_wired_ipaddr=unknown
+rp_network_wired_netmask=unknown
+rp_network_wired_gateway=unknown
 _EOF_
    fi
 
@@ -41,12 +45,12 @@ _EOF_
    cp $CONF/alsa-base.conf /etc/modprobe.d
 
    # NETWORK: setup devices
-   cat << _EOF_ > /etc/systemd/network/eth0.network
+   cat << _EOF_ > /etc/systemd/network/wired.network
 [Match]
 Name=eth0
 
 [Network]
-DHCP=yes
+DHCP=ipv4
 
 [DHCP]
 RouteMetric=10
