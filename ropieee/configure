@@ -132,15 +132,14 @@ then
   rm -rf /etc/systemd/network/wired.network
 
   # first we need to convert the address to CIDR format
-  ipaddr=$( ipcalc -b ${rp_network_wired_ipaddr}/${rp_network_wired_netmask} | grep Netmask | cut -d '=' -f 2 )
-  ipaddr="$( set -- $ipaddr )"
+  ipaddr=$( ipcalc -b ${rp_network_wired_ipaddr}/${rp_network_wired_netmask} | grep Netmask | cut -d '=' -f 2 | tr -d ' ' )
 
   cat << _EOF_ > /etc/systemd/network/wired.network
 [Match]
 Name=eth0
 
 [Network]
-Address=${ipaddr}
+Address=${rp_network_wired_ipaddr}/${ipaddr}
 
 [Route]
 Gateway=${rp_network_wired_gateway}
