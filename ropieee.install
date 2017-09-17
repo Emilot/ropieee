@@ -149,6 +149,16 @@ pre_upgrade()
       echo 'rp_network_wired_netmask=unknown' >> /etc/ropieee.conf
       echo 'rp_network_wired_gateway=unknown' >> /etc/ropieee.conf
    fi
+
+   # upgrade: add update timer override
+   if [ ! -d /etc/systemd/system/ropieee-update.timer.d ]
+   then
+      mkdir /etc/systemd/system/ropieee-update.timer.d
+      cat << _EOF_ > /etc/systemd/system/ropieee-update.timer.d/ropieee-update-override.conf
+[Timer]
+OnBootSec=15min
+_EOF_
+   fi
 }
 
 post_upgrade()
