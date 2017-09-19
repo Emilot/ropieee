@@ -37,7 +37,7 @@ if [ "${rp_auto_update}" != "manual" ]
 then
    systemctl daemon-reload
    systemctl enable ropieee-update.timer
-   systemctl start ropieee-update.timer
+   systemctl restart ropieee-update.timer
 fi	
 
 exit 0
