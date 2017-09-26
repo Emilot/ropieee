@@ -140,7 +140,7 @@ stage2()
    fi
 
    # enable the web interface
-   systemctl enable ropieee1-web
+   systemctl enable ropieee-web
 
    # enable automatic updates
    systemctl enable ropieee-update.timer
