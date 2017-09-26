@@ -145,6 +145,10 @@ stage2()
    # enable automatic updates
    systemctl enable ropieee-update.timer
 
+   # remove some leftovers
+   rm /root/BOOTSTRAP
+   rm /root/ropieee_repo
+
    echo 3 > $STAGE_PTR
 
    journalctl > /boot/RoPieee/log/stage2.log
