@@ -1,0 +1,6 @@
+#!/bin/bash
+
+COUNTRY_CODE=$( curl freegeoip.net/xml/ 2>/dev/null | grep CountryCode | sed s/CountryCode// | tr -d '<>' | cut -d '/' -f 1 | tr [A-Z] [a-z] )
+echo $COUNTRY_CODE
+
+exit 0
