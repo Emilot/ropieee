@@ -4,7 +4,20 @@
 STAGE_PTR="/boot/RoPieee/.install_stage"
 LIB="/opt/RoPieee/lib"
 
+# change to tty 2
+chvt 2
+systemctl stop getty@tty2
+echo "*** Welcome to RoPieee! ***" > /dev/tty2
+echo > /dev/tty2
 
+
+
+
+
+log_to_screen()
+{
+   echo $1 > /dev/tty2
+}
 
 partition_disk()
 {
@@ -76,6 +89,7 @@ detect_touchscreen()
 stage3()
 {
    # we're done. this is business as usual
+   log_to_screen "... Entering stage 3. We're almost done ..."
 
    # just to be sure.
    rm -f /var/lib/pacman/db.lck
@@ -93,6 +107,7 @@ stage3()
    ln -s /tmp/roonbridge_log /var/roon/RoonBridge/Logs
 
    # wait for NTP
+   log_to_screen "... Waiting for NTP synchronization ..."
    wait_for_timesync
 
    # is there something that needs rescueing?
@@ -105,6 +120,7 @@ stage3()
    . /etc/ropieee.conf
    shutdown -r $rp_reboottime
 
+   log_to_screen "... We're ready. RoPieeee is RUNNING ..."
    echo " **** RoPieee RUNNING ****"
 
    # let's go to bed...
@@ -118,6 +134,8 @@ stage2()
 {
    # we're done with configuring storage.
    echo " **** RoPieee stage 2 ****"
+   log_to_screen "... Entering stage (2/3) ..."
+   log_to_screen "... Installing additional software. This can take a while ..."
 
    # install RoonBridge
    $LIB/install_roonbridge
@@ -129,6 +147,7 @@ stage2()
    if detect_touchscreen
    then
       echo "Touchscreen detected!"
+      log_to_screen "... Touchscreen detected ..."
       cat /etc/ropieee.conf |
       sed -e 's/^rp_touchscreen_detected=.*$/rp_touchscreen_detected=1/' > /tmp/ropieee.conf.$$
       cp /tmp/ropieee.conf.$$ /etc/ropieee.conf
@@ -136,6 +155,7 @@ stage2()
       # increase gpu mem
       sed -i 's/gpu_mem=.*/gpu_mem=256/' /boot/config.txt
 
+      log_to_screen "... Installing touchscreen software ..."
       $LIB/install_touchscreen
    fi
 
@@ -158,6 +178,8 @@ stage2()
 stage1()
 {
    echo " **** RoPieee stage 1 ****"
+   log_to_screen "... Entering stage (1/3) ..."
+   log_to_screen "... Expanding filesystem. This can take a while ..."
 
    expand_fs
 
@@ -170,6 +192,8 @@ stage1()
 stage0()
 {
    echo " **** RoPieee stage 0 ****"
+   log_to_screen "... Entering stage (0/3) ..."
+   log_to_screen "... Repartitioning disk. This can take a while ..."
 
    partition_disk
    
