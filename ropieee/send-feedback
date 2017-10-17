@@ -37,6 +37,9 @@ aplay -l 2>&1 > $tmpdir/aplay_l.txt
 # kernel
 uname -a > $tmpdir/uname_a.txt
 
+# usb
+lsusb > $tmpdir/lsusb.txt
+
 # processes
 ps ax > $tmpdir/ps_ax.txt
 
@@ -46,6 +49,11 @@ pacman -Q | grep qt5     >> $tmpdir/pacman_q.txt
 
 # repo
 cp /etc/pacman.d/ropieee $tmpdir/pacman_ropieee.txt
+
+# roon
+cp -a /tmp/raatserver_log $tmpdir
+cp -a /tmp/roonbridge_log $tmpdir
+
 
 echo "compressing information ..."
 TARBALL="$( basename $tmpdir ).tar.bz2"
