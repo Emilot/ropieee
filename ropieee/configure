@@ -40,6 +40,50 @@ echo $rp_hostname > /etc/hostname
 
 
 ### FUNCTIONS
+config_repo()
+{
+   # configure repository
+   if [ -n "$rp_repo" ]
+   then
+      echo "*** configure: setting up repositories for channel: $rp_repo"
+      repo="ropieee-${rp_repo}"
+      server="http://repo-${rp_repo}.ropieee.org/"
+      cat << _EOF_ > /etc/pacman.d/ropieee
+# RoPieee repo configuration for channel: $rp_repo
+[${repo}]
+Server=${server}
+_EOF_
+   fi
+}
+
+config_audio()
+{
+   echo "*** configure: setting up audio"
+   if [ "$rp_audio" = "ropieee-no-hat" ]
+   then
+      echo " no audio HAT configured"
+      sed -i '/dtoverlay=/d' /boot/config.txt
+   else
+      echo " configuring audio HAT $rp_audio"
+      sed -i '/dtoverlay=/d' /boot/config.txt
+      echo -e "\ndtoverlay=$rp_audio" >> /boot/config.txt
+   fi
+
+   if [ "$rp_audio_usb" = "1" ]
+   then
+      echo " configuring USB audio"
+      $LIB/enable_usb_audio
+   else
+      $LIB/disable_usb_audio
+   fi
+
+   # disable onboard audio
+   if [ $( grep -c 'dtparam=audio=off' /boot/config.txt ) -eq 0 ]
+   then
+      echo "dtparam=audio=off" >> /boot/config.txt
+   fi
+}
+
 config_update_scenario()
 {
    echo "*** configure: setting update scenario to ${rp_auto_update}"
@@ -47,32 +91,6 @@ config_update_scenario()
 }
 
 
-
-# configure audio
-echo "*** configure: setting up audio"
-if [ "$rp_audio" = "ropieee-no-hat" ]
-then
-   echo " no audio HAT configured"
-   sed -i '/dtoverlay=/d' /boot/config.txt
-else
-   echo " configuring audio HAT $rp_audio"
-   sed -i '/dtoverlay=/d' /boot/config.txt
-   echo -e "\ndtoverlay=$rp_audio" >> /boot/config.txt
-fi
-
-if [ "$rp_audio_usb" = "1" ]
-then
-   echo " configuring USB audio"
-   $LIB/enable_usb_audio
-else
-   $LIB/disable_usb_audio
-fi
-
-# disable onboard audio
-if [ $( grep -c 'dtparam=audio=off' /boot/config.txt ) -eq 0 ]
-then
-   echo "dtparam=audio=off" >> /boot/config.txt
-fi
 
 # configure boot delay
 if [ $( grep -c 'boot_delay=' /boot/config.txt ) -eq 0 ]
@@ -107,19 +125,6 @@ then
    then
       systemctl enable ropieee-touchui
    fi
-fi
-
-# configure repository
-if [ -n "$rp_repo" ]
-then
-   echo "*** configure: setting up repositories for channel: $rp_repo"
-   repo="ropieee-${rp_repo}"
-   server="http://repo-${rp_repo}.ropieee.org/"
-   cat << _EOF_ > /etc/pacman.d/ropieee
-# RoPieee repo configuration for channel: $rp_repo
-[${repo}]
-Server=${server}
-_EOF_
 fi
 
 # configure network: wired
@@ -161,6 +166,8 @@ Metric=10
 _EOF_
 fi
 
+config_repo
+config_audio
 config_update_scenario
 
 systemctl daemon-reload
