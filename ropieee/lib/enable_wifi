@@ -31,5 +31,13 @@ modprobe brcmfmac
 # restart networking
 systemctl restart systemd-networkd
 
+# try to see if we can set the wireless-regdom
+country_code=$( /opt/RoPieee/lib/get_country_code | tr [a-z] [A-Z] )
+
+if [ $( grep -c $country_code /etc/conf.d/wireless-regdom ) -gt 0 ]
+then
+   echo "WIRELESS_REGDOM=${country_code}" >> /etc/conf.d/wireless-regdom
+fi
+
 exit 0
 
