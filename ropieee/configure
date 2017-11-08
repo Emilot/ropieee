@@ -90,6 +90,26 @@ config_update_scenario()
    $LIB/set_update_timer
 }
 
+config_wireless_network()
+{
+   if [ "$rp_network_wireless_enabled" = "0" ]
+   then
+      $LIB/disable_wifi
+      return
+   fi
+
+   echo "*** configure: setting up wireless network"
+   $LIB/enable_wifi
+
+   echo " configure WPA supplicant"
+   wpa_passphrase $rp_network_wireless_essid $rp_network_wireless_psk > /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
+
+   # enable service
+   systemctl enable wpa_supplicant@wlan0
+   systemctl start wpa_supplicant@wlan0
+
+}
+
 
 
 # configure boot delay
@@ -169,6 +189,7 @@ fi
 config_repo
 config_audio
 config_update_scenario
+config_wireless_network
 
 systemctl daemon-reload
 
@@ -181,5 +202,5 @@ then
    systemctl reboot
 fi
 
-exit 0 
+exit 0
 

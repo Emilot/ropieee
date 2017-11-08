@@ -11,7 +11,7 @@ test "$( /opt/RoPieee/lib/get_hardware_model )" != "rpi3" && exit 1
 # remove module blacklist
 rm -f /etc/modprobe.d/99-ropieee-disable-wifi.conf
 
-# create networked configuration
+# create networkd configuration
 cat << _EOF_ > /etc/systemd/network/wireless.network
 [Match]
 Name=wlan0
@@ -28,16 +28,18 @@ systemctl daemon-reload
 # insert modules
 modprobe brcmfmac
 
-# restart networking
-systemctl restart systemd-networkd
-
 # try to see if we can set the wireless-regdom
 country_code=$( /opt/RoPieee/lib/get_country_code | tr [a-z] [A-Z] )
-
-if [ $( grep -c $country_code /etc/conf.d/wireless-regdom ) -gt 0 ]
+if [ -n "$country_code" ]
 then
-   echo "WIRELESS_REGDOM=${country_code}" >> /etc/conf.d/wireless-regdom
+   if [ $( grep -c $country_code /etc/conf.d/wireless-regdom ) -gt 0 ]
+   then
+      echo "WIRELESS_REGDOM=${country_code}" >> /etc/conf.d/wireless-regdom
+   fi
 fi
+
+# restart networking
+systemctl restart systemd-networkd
 
 exit 0
 

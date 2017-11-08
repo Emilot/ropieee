@@ -1,7 +1,7 @@
 # Maintainer: Harry ten Berge <htenberge@gmail.com>
 
 pkgname=ropieee
-pkgver=20171017
+pkgver=20171108
 pkgrel=1
 arch=(any)
 url="https://github.com/RoPieee/"
@@ -57,6 +57,7 @@ echo "package"
    install -m0755 "../ropieee/lib/check_for_updates"                    "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/set_update_timer"                     "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/get_country_code"                     "${pkgdir}/opt/RoPieee/lib"
+   install -m0755 "../ropieee/lib/get_wifi_networks"                    "${pkgdir}/opt/RoPieee/lib"
 
    install -m0644 "../ropieee/systemd/ropieee1-bootstrap.service"       "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/systemd/ropieee-update.service"           "${pkgdir}/etc/systemd/system"
@@ -69,6 +70,5 @@ echo "package"
    # overruling some default services
    install -m0644 "../ropieee/systemd/ntpd.service"                     "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/systemd/ntpdate.service"                  "${pkgdir}/etc/systemd/system"
-#   install -m0644 "../ropieee/rescue.service"                           "${pkgdir}/etc/systemd/system"
 }
 

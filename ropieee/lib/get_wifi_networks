@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# we need to retrieve all available ESSIDs
+iwlist wlan0 scanning | grep ESSID | cut -d ':' -f 2 | tr -d '"'
+
+exit 0
