@@ -29,6 +29,9 @@ rp_network_wired_method=dhcp
 rp_network_wired_ipaddr=unknown
 rp_network_wired_netmask=unknown
 rp_network_wired_gateway=unknown
+rp_network_wireless_enabled=0
+rp_network_wireless_essid=unknown
+rp_network_wireless_psk=unknown
 _EOF_
    fi
 
@@ -148,6 +151,14 @@ pre_upgrade()
       echo 'rp_network_wired_ipaddr=unknown'  >> /etc/ropieee.conf
       echo 'rp_network_wired_netmask=unknown' >> /etc/ropieee.conf
       echo 'rp_network_wired_gateway=unknown' >> /etc/ropieee.conf
+   fi
+
+   # upgrade: add wireless network configuration parameters
+   if [ $( grep -c rp_network_wireless_enabled /etc/ropieee.conf ) -eq 0 ]
+   then
+      echo 'rp_network_wireless_enabled=0'     >> /etc/ropieee.conf
+      echo 'rp_network_wireless_essid=unknown' >> /etc/ropieee.conf
+      echo 'rp_network_wireless_psk=unknown'   >> /etc/ropieee.conf
    fi
 
    # upgrade: add update timer override
