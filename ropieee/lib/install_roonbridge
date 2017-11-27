@@ -12,7 +12,7 @@ echo "*** RoPieee: installing RoonBridge..."
 i=1
 while [ $i -le 3 ]
 do
-   echo "** attempt $i **"
+   echo "** download attempt $i **"
    rm -f /tmp/roonbridge.sh
    wget -q -t 2 -T 30 -O /tmp/roonbridge.sh $URL
    test $? -eq 0 && break
@@ -26,7 +26,21 @@ then
 fi
 
 chmod +x /tmp/roonbridge.sh
-/tmp/roonbridge.sh <<< y
 
-exit $? 
+i=1
+while [ $i -le 3 ]
+do
+   echo "** installation attempt $i **"
+   /tmp/roonbridge.sh <<< y
+   test $? -eq 0 && break
+   i=$( expr $i + 1 )
+done
+
+if [ $i -eq 4 ]
+then
+   echo "Error. Installation RoonBridge failed!"
+   exit 1
+fi
+
+exit 0
 
