@@ -136,6 +136,11 @@ stage2()
    echo " **** RoPieee stage 2 ****"
    log_to_screen "... Entering stage (2/3) ..."
    log_to_screen "... Installing additional software. This can take a while ..."
+   log_to_screen "... MAKE SURE ROPIEEE HAS INTERNET CONNECTION ..."
+
+   # wait for NTP
+   log_to_screen "... Waiting for NTP synchronization ..."
+   wait_for_timesync
 
    # install RoonBridge
    $LIB/install_roonbridge
