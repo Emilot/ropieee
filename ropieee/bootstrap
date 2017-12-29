@@ -71,8 +71,10 @@ wait_for_timesync()
       if [ $loop -gt 30 ]
       then
          systemctl restart ntpdate
-	 loop=1
       fi
+
+      # if this takes more then a minute we're gonna bail out
+      test $loop -gt 60 && return
    done
 }
 
@@ -108,6 +110,7 @@ stage3()
 
    # wait for NTP
    log_to_screen "... Waiting for NTP synchronization ..."
+   systemctl restart ntpdate
    wait_for_timesync
 
    # is there something that needs rescueing?
