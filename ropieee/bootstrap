@@ -70,7 +70,11 @@ wait_for_timesync()
       loop=$( expr $loop + 1 )
       if [ $loop -gt 30 ]
       then
+	 echo "... restarting ntpdate ..."
+	 systemctl stop ntpd
          systemctl restart ntpdate
+	 systemctl start ntpd
+	 sleep 2
       fi
 
       # if this takes more then a minute we're gonna bail out
@@ -143,6 +147,7 @@ stage2()
    # wait for NTP
    log_to_screen "... Waiting for NTP synchronization ..."
    systemctl restart ntpdate
+   sleep 2
    wait_for_timesync
 
    # install RoonBridge
