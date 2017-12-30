@@ -144,11 +144,13 @@ stage2()
    log_to_screen "... Installing additional software. This can take a while ..."
    log_to_screen "... MAKE SURE ROPIEEE HAS INTERNET CONNECTION ..."
 
-   # wait for NTP
-   log_to_screen "... Waiting for NTP synchronization ..."
-   systemctl restart ntpdate
-   sleep 2
-   wait_for_timesync
+#   # wait for NTP
+#   log_to_screen "... Waiting for NTP synchronization ..."
+#   systemctl stop ntpd
+#   systemctl restart ntpdate
+#   system
+#   sleep 2
+#   wait_for_timesync
 
    # install RoonBridge
    $LIB/install_roonbridge
