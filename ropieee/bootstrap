@@ -110,7 +110,6 @@ stage3()
 
    # wait for NTP
    log_to_screen "... Waiting for NTP synchronization ..."
-   systemctl restart ntpdate
    wait_for_timesync
 
    # is there something that needs rescueing?
@@ -143,6 +142,7 @@ stage2()
 
    # wait for NTP
    log_to_screen "... Waiting for NTP synchronization ..."
+   systemctl restart ntpdate
    wait_for_timesync
 
    # install RoonBridge
