@@ -74,7 +74,7 @@ wait_for_timesync()
 	 systemctl stop ntpd
          systemctl restart ntpdate
 	 systemctl start ntpd
-	 sleep 2
+	 sleep 1
       fi
 
       # if this takes more then a minute we're gonna bail out
