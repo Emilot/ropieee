@@ -12,5 +12,10 @@ then
    MODEL="rpi3"
 fi 
 
+if [ $( uname -r ) = "3.10.38" ]
+then
+   MODEL="sparky"
+fi
+
 echo "$MODEL"
 exit 0
