@@ -61,7 +61,8 @@ cd /tmp
 tar jcf ./$TARBALL $( basename $tmpdir )
 
 echo "sending it..."
-wput --timeout=10th-4 --tries=1 --waitretry=2 -B -u $TARBALL ftp://"$FTP_USER":"$FTP_PASS"@"$FTP_ADDR"
+#wput --timeout=10th-4 --tries=1 --waitretry=2 -B -u $TARBALL ftp://"$FTP_USER":"$FTP_PASS"@"$FTP_ADDR"
+curl --connect-timeout 10 --retry-delay 2 --retry 1 -T $TARBALL -u "$FTP_USER":"$FTP_PASS" ftp://"$FTP_ADDR"
 
 rm -rf $tmpdir
 rm -f $TARBALL
