@@ -1,14 +1,14 @@
 # Maintainer: Harry ten Berge <htenberge@gmail.com>
 
 pkgname=ropieee
-pkgver=20171119
+pkgver=20180318
 pkgrel=1
 arch=(any)
 url="https://github.com/RoPieee/"
 license=('MIT')
 depends=('ropieee-version'
 	 'fakeroot'
-         'wput'
+         'curl'
 	 'git'
 	 'ipcalc')
 install=${pkgname}.install
