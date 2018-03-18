@@ -1,4 +1,4 @@
 /dev/mmcblk0p1  	/boot   		auto    defaults,noatime,discard        			0 2
-/dev/mmcblk0p2  	/	   		auto    defaults,noatime,discard        			0 1
+/dev/mmcblk0p2  	/	   		auto    defaults,noatime,discard,x-systemd.growfs		0 1
 
 tmpfs 			/var/log 		tmpfs 	defaults,size=20m,noatime,nodev,nosuid,mode=1777	0 0
