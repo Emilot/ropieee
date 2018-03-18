@@ -22,7 +22,7 @@ rp_reboottime=03:04
 rp_auto_update=daily
 rp_timezone=Europe/Amsterdam
 rp_touchscreen_detected=0
-rp_touchscreen_orientation=default
+rp_touchscreen_orientation=rotated
 rp_touchscreen_zone=unknown
 rp_repo=${ropieee_repo}
 rp_network_wired_method=dhcp
@@ -61,6 +61,9 @@ _EOF_
 
    # NETWORK: disable wifi
    $LIB/disable_wifi
+
+   # SCREEN: rotate screen by default
+   $LIB/set_touchscreen_orient_rotated
 
    # tune kernel params
    cp $CONF/ropieee.conf /etc/sysctl.d
