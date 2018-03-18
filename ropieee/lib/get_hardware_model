@@ -7,7 +7,8 @@ REVISION_CODE=$(cat /proc/cpuinfo | grep 'Revision' | awk '{print $3}')
 if [[ "$REVISION_CODE" = "a020a0" ||
       "$REVISION_CODE" = "a02082" ||
       "$REVISION_CODE" = "a22082" ||
-      "$REVISION_CODE" = "a32082" ]]
+      "$REVISION_CODE" = "a32082" ||
+      "$REVISION_CODE" = "a020d3" ]]
 then
    MODEL="rpi3"
 fi 
