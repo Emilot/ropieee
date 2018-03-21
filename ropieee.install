@@ -62,9 +62,6 @@ _EOF_
    # NETWORK: disable wifi
    $LIB/disable_wifi
 
-   # SCREEN: rotate screen by default
-   $LIB/set_touchscreen_orient_rotated
-
    # tune kernel params
    cp $CONF/ropieee.conf /etc/sysctl.d
 

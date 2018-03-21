@@ -151,6 +151,9 @@ stage2()
       sed -e 's/^rp_touchscreen_detected=.*$/rp_touchscreen_detected=1/' > /tmp/ropieee.conf.$$
       cp /tmp/ropieee.conf.$$ /etc/ropieee.conf
 
+      # rotate screen by default
+      $LIB/set_touchscreen_orient_rotated
+
       # increase gpu mem
       sed -i 's/gpu_mem=.*/gpu_mem=256/' /boot/config.txt
 
