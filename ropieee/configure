@@ -65,6 +65,10 @@ config_audio()
       sed -i '/dtoverlay=/d' /boot/config.txt
    else
       echo " configuring audio HAT $rp_audio"
+
+      # are we using a virtual HAT?
+      test "$rp_audio" = "virtual-audiophonics" && rp_audio="rpi-dac"
+
       sed -i '/dtoverlay=/d' /boot/config.txt
       echo -e "\ndtoverlay=$rp_audio" >> /boot/config.txt
    fi
