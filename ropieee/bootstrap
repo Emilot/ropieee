@@ -128,13 +128,7 @@ stage2()
    log_to_screen "... Installing additional software. This can take a while ..."
    log_to_screen "... MAKE SURE ROPIEEE HAS INTERNET CONNECTION ..."
 
-#   # wait for NTP
-#   log_to_screen "... Waiting for NTP synchronization ..."
-#   systemctl stop ntpd
-#   systemctl restart ntpdate
-#   system
-#   sleep 2
-#   wait_for_timesync
+   . /etc/ropieee.conf
 
    # install RoonBridge
    $LIB/install_roonbridge
@@ -142,23 +136,26 @@ stage2()
    # and run the updates for the first time
    /opt/RoPieee/sbin/run-updates
 
-   # let's see if we've got a touchscreen
-   if detect_touchscreen
+   if [ $rp_oem -eq 0 ]
    then
-      echo "Touchscreen detected!"
-      log_to_screen "... Touchscreen detected ..."
-      cat /etc/ropieee.conf |
-      sed -e 's/^rp_touchscreen_detected=.*$/rp_touchscreen_detected=1/' > /tmp/ropieee.conf.$$
-      cp /tmp/ropieee.conf.$$ /etc/ropieee.conf
+      # let's see if we've got a touchscreen
+      if detect_touchscreen
+      then
+         echo "Touchscreen detected!"
+         log_to_screen "... Touchscreen detected ..."
+         cat /etc/ropieee.conf |
+         sed -e 's/^rp_touchscreen_detected=.*$/rp_touchscreen_detected=1/' > /tmp/ropieee.conf.$$
+         cp /tmp/ropieee.conf.$$ /etc/ropieee.conf
 
-      # rotate screen by default
-      $LIB/set_touchscreen_orient_rotated
+         # rotate screen by default
+         $LIB/set_touchscreen_orient_rotated
 
-      # increase gpu mem
-      sed -i 's/gpu_mem=.*/gpu_mem=256/' /boot/config.txt
+         # increase gpu mem
+         sed -i 's/gpu_mem=.*/gpu_mem=256/' /boot/config.txt
 
-      log_to_screen "... Installing touchscreen software ..."
-      $LIB/install_touchscreen
+         log_to_screen "... Installing touchscreen software ..."
+         $LIB/install_touchscreen
+      fi
    fi
 
    # enable the web interface

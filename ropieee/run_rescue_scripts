@@ -5,6 +5,8 @@ URL="https://github.com/RoPieee/ropieee-rescue.git"
 # fix possible certificate issues
 ln -sf /etc/ca-certificates/extracted/ca-bundle.trust.crt /etc/ssl/certs/ca-certificates.crt
 
+. /etc/ropieee.conf
+
 # first update repo
 cd /boot/RoPieee
 if [ ! -d /boot/RoPieee/ropieee-rescue ]
@@ -12,10 +14,11 @@ then
    git clone $URL
 else
    cd /boot/RoPieee/ropieee-rescue
+   git checkout $rp_rescue_branch
    git pull
 fi
 
-echo "*** running RoPieee rescue scripts ***"
+echo "*** running RoPieee rescue scripts on branch: ${rp_rescue_branch} ***"
 for i in $( ls /boot/RoPieee/ropieee-rescue )
 do
    echo "**  executing $i"

@@ -26,6 +26,7 @@ post_install()
    then
       cat << _EOF_ > /etc/ropieee.conf
 rp_oem=${ropieee_oem}
+rp_rescue_branch=master
 rp_hostname=${hostname}
 rp_audio=ropieee-no-hat
 rp_audio_usb=1
@@ -114,6 +115,15 @@ pre_upgrade()
    new_version=$1
    prev_version=$2
 
+   if [ $( grep -c rp_oem /etc/ropieee.conf ) -eq 0 ]
+   then
+      echo 'rp_oem=0' >> /etc/ropieee.conf
+   fi
+
+   if [ $( grep -c rp_rescue_branch /etc/ropieee.conf ) -eq 0 ]
+   then
+      echo 'rp_rescue_branch=master' >> /etc/ropieee.conf
+   fi
 }
 
 post_upgrade()
