@@ -11,11 +11,22 @@ post_install()
       ropieee_repo=stable
    fi
 
+   # is this an OEM setup?
+   if [ -f /etc/ropieee-oem.conf ]
+   then
+      ropieee_oem=1
+   else
+      ropieee_oem=0
+   fi
+
+   hostname=$( cat /etc/hostname )
+
    # setup initial config file
    if [ ! -f /etc/ropieee.conf ]
    then
       cat << _EOF_ > /etc/ropieee.conf
-rp_hostname=ropieee
+rp_oem=${ropieee_oem}
+rp_hostname=${hostname}
 rp_audio=ropieee-no-hat
 rp_audio_usb=1
 rp_reboottime=03:04
@@ -42,7 +53,7 @@ _EOF_
    fi
 
    # fix ssh access for root (permitRootlogin yes in sshd_config)
-   cp $CONF/sshd_config /etc/ssh
+   #cp $CONF/sshd_config /etc/ssh
 
    # fix modprobe for usb devices
    cp $CONF/alsa-base.conf /etc/modprobe.d
@@ -66,7 +77,7 @@ _EOF_
    cp $CONF/ropieee.conf /etc/sysctl.d
 
    # everything in ram
-   cp $CONF/fstab /etc
+   #cp $CONF/fstab /etc
 
    # only volatile logging
    cp $CONF/journald.conf /etc/systemd
@@ -75,7 +86,7 @@ _EOF_
    cp $CONF/resolved.conf /etc/systemd
 
    # pacman configuration
-   cp $CONF/pacman.conf /etc
+   #cp $CONF/pacman.conf /etc
 
    # prepare RoPieee's update mechanism
    mkdir /etc/systemd/system/ropieee-update.timer.d
@@ -103,73 +114,6 @@ pre_upgrade()
    new_version=$1
    prev_version=$2
 
-   # with version 7 we moved the systemd files to the packages
-   # this means we first need to remove them
-   if [ "$prev_version" = "6-2" ]
-   then
-      rm /etc/systemd/system/ropieee-bootstrap.service 
-      rm /etc/systemd/system/ropieee-update.service 
-      rm /etc/systemd/system/ropieee-update.timer 
-   fi
-
-   # with version 20170516-1 we added the timezone setting
-   # this means we need to add it if it does not exist
-   if [ $(grep -c timezone /etc/ropieee.conf ) -eq 0 ]
-   then
-      echo 'rp_timezone=Europe/Amsterdam' >> /etc/ropieee.conf
-   fi
-
-   # with version 20170519-1 we moved the systemd rescue file to the package
-   # this means we first need to remove it
-   if [ "$prev_version" = "20170518-2" ]
-   then
-      rm /etc/systemd/system/rescue.service
-   fi
-
-   # upgrade: add repo variable 
-   if [ $( grep -c rp_repo /etc/ropieee.conf ) -eq 0 ]
-   then
-      # let's see if we can detect the current repo type
-      test_repo=$( grep -c '^\[ropieee-test\]' /etc/pacman.conf )
-      beta_repo=$( grep -c '^\[ropieee-beta\]' /etc/pacman.conf )
-
-      if [ $test_repo -gt 0 ]
-      then
-         echo 'rp_repo=test' >> /etc/ropieee.conf
-      elif [ $beta_repo -gt 0 ]
-      then
-         echo 'rp_repo=beta' >> /etc/ropieee.conf
-      else
-         echo 'rp_repo=stable' >> /etc/ropieee.conf
-      fi
-   fi
-
-   # upgrade: add network configuration parameters
-   if [ $( grep -c rp_network_wired_method /etc/ropieee.conf ) -eq 0 ]
-   then
-      echo 'rp_network_wired_method=dhcp'     >> /etc/ropieee.conf
-      echo 'rp_network_wired_ipaddr=unknown'  >> /etc/ropieee.conf
-      echo 'rp_network_wired_netmask=unknown' >> /etc/ropieee.conf
-      echo 'rp_network_wired_gateway=unknown' >> /etc/ropieee.conf
-   fi
-
-   # upgrade: add wireless network configuration parameters
-   if [ $( grep -c rp_network_wireless_enabled /etc/ropieee.conf ) -eq 0 ]
-   then
-      echo 'rp_network_wireless_enabled=0'     >> /etc/ropieee.conf
-      echo 'rp_network_wireless_essid=unknown' >> /etc/ropieee.conf
-      echo 'rp_network_wireless_psk=unknown'   >> /etc/ropieee.conf
-   fi
-
-   # upgrade: add update timer override
-   if [ ! -d /etc/systemd/system/ropieee-update.timer.d ]
-   then
-      mkdir /etc/systemd/system/ropieee-update.timer.d
-      cat << _EOF_ > /etc/systemd/system/ropieee-update.timer.d/ropieee-update-override.conf
-[Timer]
-OnBootSec=15min
-_EOF_
-   fi
 }
 
 post_upgrade()
@@ -180,15 +124,15 @@ post_upgrade()
    new_version=$1
    prev_version=$2
 
-   # compat trick due to adding of stage3
-   if [ $( cat /boot/RoPieee/.install_stage ) -eq 2 ]
-   then
-      echo 3 > /boot/RoPieee/.install_stage
-   fi
+   ## compat trick due to adding of stage3
+   #if [ $( cat /boot/RoPieee/.install_stage ) -eq 2 ]
+   #then
+   #   echo 3 > /boot/RoPieee/.install_stage
+   #fi
 
    # and replace some configuration files
-   cp $CONF/pacman.conf /etc
-   cp $CONF/resolved.conf /etc/systemd
+   #cp $CONF/pacman.conf /etc
+   #p $CONF/resolved.conf /etc/systemd
 
    # run configure
    /opt/RoPieee/sbin/configure

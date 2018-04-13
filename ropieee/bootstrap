@@ -87,7 +87,7 @@ stage3()
    # disable HDMI
    /opt/vc/bin/tvservice -o
 
-   # make sure Roon logs to ram
+   # make sure Roon logs to RAM
    rm -rf /var/roon/RAATServer/Logs
    mkdir /tmp/raatserver_log
    ln -s /tmp/raatserver_log /var/roon/RAATServer/Logs
@@ -110,7 +110,7 @@ stage3()
    . /etc/ropieee.conf
    shutdown -r $rp_reboottime
 
-   log_to_screen "... We're ready. RoPieeee is RUNNING ..."
+   log_to_screen "... We're ready. RoPieee is RUNNING ..."
    echo " **** RoPieee RUNNING ****"
 
    # let's go to bed...
@@ -203,7 +203,8 @@ stage0()
 
    partition_disk
    
-   echo 1 > $STAGE_PTR
+   # we can skip stage 1 and go immediately to stage 2
+   echo 2 > $STAGE_PTR
 
    mkdir -p /boot/RoPieee/log
 
