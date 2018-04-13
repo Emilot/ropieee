@@ -202,7 +202,12 @@ stage0()
    log_to_screen "... Repartitioning disk. This can take a while ..."
 
    partition_disk
-   
+
+
+   # fix systemd-networkd resolver
+   rm /etc/resolv.conf
+   ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+
    # we can skip stage 1 and go immediately to stage 2
    echo 2 > $STAGE_PTR
 
