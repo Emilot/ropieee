@@ -30,6 +30,7 @@ rp_rescue_branch=master
 rp_hostname=${hostname}
 rp_audio=ropieee-no-hat
 rp_audio_usb=1
+rp_reboot_schedule=daily
 rp_reboottime=03:04
 rp_auto_update=daily
 rp_timezone=Europe/Amsterdam
@@ -53,9 +54,6 @@ _EOF_
       echo 0 > /boot/RoPieee/.install_stage
    fi
 
-   # fix ssh access for root (permitRootlogin yes in sshd_config)
-   #cp $CONF/sshd_config /etc/ssh
-
    # fix modprobe for usb devices
    cp $CONF/alsa-base.conf /etc/modprobe.d
 
@@ -77,17 +75,11 @@ _EOF_
    # tune kernel params
    cp $CONF/ropieee.conf /etc/sysctl.d
 
-   # everything in ram
-   #cp $CONF/fstab /etc
-
    # only volatile logging
    cp $CONF/journald.conf /etc/systemd
 
    # systemd resolved configuration
    cp $CONF/resolved.conf /etc/systemd
-
-   # pacman configuration
-   #cp $CONF/pacman.conf /etc
 
    # prepare RoPieee's update mechanism
    mkdir /etc/systemd/system/ropieee-update.timer.d
@@ -123,6 +115,11 @@ pre_upgrade()
    if [ $( grep -c rp_rescue_branch /etc/ropieee.conf ) -eq 0 ]
    then
       echo 'rp_rescue_branch=master' >> /etc/ropieee.conf
+   fi
+
+   if [ $( grep -c rp_reboot_schedule /etc/ropieee.conf ) -eq 0 ]
+   then
+      echo 'rp_rescue_schedule=daily' >> /etc/ropieee.conf
    fi
 }
 
