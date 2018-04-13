@@ -1,7 +1,15 @@
 #!/bin/bash
 
-# we need to retrieve the model from the CPU revision
 MODEL="unknown"
+
+if [ -f /etc/ropieee-oem.conf ]
+then
+   MODEL=$( cat /etc/ropieee-oem.conf )
+   echo "$MODEL"
+   exit 0
+fi
+
+# we try to retrieve the model from the CPU revision
 REVISION_CODE=$(cat /proc/cpuinfo | grep 'Revision' | awk '{print $3}')
 
 if [[ "$REVISION_CODE" = "a020a0" ||
