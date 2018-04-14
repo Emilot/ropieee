@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ ! -f /etc/uuid ]
+then
+   uuidgen > /etc/uuid
+fi
+
+echo $( cat /etc/uuid )
+
+exit 0
