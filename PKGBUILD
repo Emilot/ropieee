@@ -1,8 +1,8 @@
 # Maintainer: Harry ten Berge <htenberge@gmail.com>
 
 pkgname=ropieee
-pkgver=20180331
-pkgrel=1
+pkgver=20180414
+pkgrel=2
 arch=(any)
 url="https://github.com/RoPieee/"
 license=('MIT')
@@ -59,6 +59,7 @@ echo "package"
    install -m0755 "../ropieee/lib/set_update_timer"                       "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/get_country_code"                       "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/get_wifi_networks"                      "${pkgdir}/opt/RoPieee/lib"
+   install -m0755 "../ropieee/lib/get_uuid"                               "${pkgdir}/opt/RoPieee/lib"
 
    install -m0644 "../ropieee/systemd/ropieee1-bootstrap.service"         "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/systemd/ropieee-update.service"             "${pkgdir}/etc/systemd/system"
