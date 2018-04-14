@@ -205,6 +205,9 @@ stage0()
    rm /etc/resolv.conf
    ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
 
+   # generate UUID
+   uuidgen > /etc/uuid
+
    # we can skip stage 1 and go immediately to stage 2
    echo 2 > $STAGE_PTR
 
