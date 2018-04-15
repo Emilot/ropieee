@@ -131,7 +131,7 @@ stage2()
    . /etc/ropieee.conf
 
    # install RoonBridge
-   $LIB/install_roonbridge
+   test $rp_oem -eq 0 && $LIB/install_roonbridge
 
    # and run the updates for the first time
    /opt/RoPieee/sbin/run-updates
@@ -199,7 +199,6 @@ stage0()
    log_to_screen "... Repartitioning disk. This can take a while ..."
 
    partition_disk
-
 
    # fix systemd-networkd resolver
    rm /etc/resolv.conf
