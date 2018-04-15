@@ -108,7 +108,7 @@ stage3()
    /boot/RoPieee/control_led running &
 
    . /etc/ropieee.conf
-   shutdown -r $rp_reboottime
+   test "$rp_shutdown_schedule" = "daily" && shutdown -r $rp_reboottime
 
    log_to_screen "... We're ready. RoPieee is RUNNING ..."
    echo " **** RoPieee RUNNING ****"
