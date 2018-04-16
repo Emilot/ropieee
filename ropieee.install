@@ -26,6 +26,8 @@ post_install()
    then
       cat << _EOF_ > /etc/ropieee.conf
 rp_oem=${ropieee_oem}
+rp_arch_base=201804_00
+rp_repo=${ropieee_repo}
 rp_rescue_branch=master
 rp_hostname=${hostname}
 rp_audio=ropieee-no-hat
@@ -37,7 +39,6 @@ rp_timezone=Europe/Amsterdam
 rp_touchscreen_detected=0
 rp_touchscreen_orientation=rotated
 rp_touchscreen_zone=unknown
-rp_repo=${ropieee_repo}
 rp_network_wired_method=dhcp
 rp_network_wired_ipaddr=unknown
 rp_network_wired_netmask=unknown
@@ -120,6 +121,11 @@ pre_upgrade()
    if [ $( grep -c rp_reboot_schedule /etc/ropieee.conf ) -eq 0 ]
    then
       echo 'rp_rescue_schedule=daily' >> /etc/ropieee.conf
+   fi
+
+   if [ $( grep -c rp_arch_base /etc/ropieee.conf ) -eq 0 ]
+   then
+      echo 'rp_arch_base=201804_00' >> /etc/ropieee.conf
    fi
 }
 
