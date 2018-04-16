@@ -12,11 +12,11 @@ cd /boot/RoPieee
 if [ ! -d /boot/RoPieee/ropieee-rescue ]
 then
    git clone $URL
-else
-   cd /boot/RoPieee/ropieee-rescue
-   git checkout $rp_rescue_branch
-   git pull
 fi
+
+cd /boot/RoPieee/ropieee-rescue
+git checkout $rp_rescue_branch
+git pull
 
 echo "*** running RoPieee rescue scripts on branch: ${rp_rescue_branch} ***"
 for i in $( ls /boot/RoPieee/ropieee-rescue )
