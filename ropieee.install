@@ -28,6 +28,7 @@ post_install()
 rp_oem=${ropieee_oem}
 rp_arch_base=201804_00
 rp_repo=${ropieee_repo}
+rp_repo_url=http://repo-__RP_REPO__.ropieee.org/
 rp_rescue_branch=master
 rp_hostname=${hostname}
 rp_audio=ropieee-no-hat
@@ -126,6 +127,11 @@ pre_upgrade()
    if [ $( grep -c rp_arch_base /etc/ropieee.conf ) -eq 0 ]
    then
       echo 'rp_arch_base=201804_00' >> /etc/ropieee.conf
+   fi
+
+   if [ $( grep -c rp_repo_url /etc/ropieee.conf ) -eq 0 ]
+   then
+      echo 'rp_repo_url=http://repo-__RP_REPO__.ropieee.org/' >> /etc/ropieee.conf
    fi
 }
 
