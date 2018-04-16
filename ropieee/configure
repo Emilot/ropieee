@@ -42,7 +42,9 @@ echo $rp_hostname > /etc/hostname
 ### FUNCTIONS
 config_repo()
 {
-   # configure repository
+   # configure repository, only if we're not OEM
+   test $rp_oem = 1 && return
+
    if [ -n "$rp_repo" ]
    then
       echo "*** configure: setting up repositories for channel: $rp_repo"
