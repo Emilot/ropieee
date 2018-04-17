@@ -113,7 +113,8 @@ stage3()
    systemctl stop ropieee1-led
    /boot/RoPieee/control_led running &
 
-   test "$rp_shutdown_schedule" = "daily" && shutdown -r $rp_reboottime
+   # set reboot schedule
+   test "$rp_reboot_schedule" = "daily" && shutdown -r $rp_reboottime
 
    if [ "${rp_auto_update}" = "on_boot" ]
    then
