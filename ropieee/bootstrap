@@ -79,7 +79,10 @@ detect_touchscreen()
 stage3()
 {
    # we're done. this is business as usual
-   log_to_screen "... Entering stage 3. We're almost done ..."
+   log_to_screen "... Entering stage 3. We're operational in a sec ..."
+
+   # read config
+   . /etc/ropieee.conf
 
    # just to be sure.
    rm -f /var/lib/pacman/db.lck
@@ -107,11 +110,19 @@ stage3()
    systemctl stop ropieee1-led
    /boot/RoPieee/control_led running &
 
-   . /etc/ropieee.conf
    test "$rp_shutdown_schedule" = "daily" && shutdown -r $rp_reboottime
+
+   if [ $rp_oem -eq 1 ]
+   then
+      # run updates...
+      /opt/RoPieee/sbin/run-updates
+   fi
 
    log_to_screen "... We're ready. RoPieee is RUNNING ..."
    echo " **** RoPieee RUNNING ****"
+
+   # if we're OEM we can start the OEM implementation
+   test $rp_oem -eq 1 && systemctl start ropieee-oem
 
    # let's go to bed...
    while true
