@@ -35,7 +35,7 @@ rp_audio=ropieee-no-hat
 rp_audio_usb=1
 rp_reboot_schedule=daily
 rp_reboottime=03:04
-rp_auto_update=daily
+rp_auto_update=on_boot
 rp_timezone=Europe/Amsterdam
 rp_touchscreen_detected=0
 rp_touchscreen_orientation=rotated
@@ -160,7 +160,6 @@ post_upgrade()
    systemctl enable ropieee1-bootstrap.service
    systemctl enable ropieee1-led.service
    systemctl enable ropieee1-reboot.service
-   systemctl enable ropieee-update.timer
 
    # reload systemd
    systemctl daemon-reload
