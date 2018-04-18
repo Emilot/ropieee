@@ -202,7 +202,7 @@ stage1()
    journalctl > /boot/RoPieee/log/stage1.log
 
    log_to_screen "... ready to leave stage 1 ..."
-   sleep 5
+   sleep 2
 
    reboot
 }
@@ -227,7 +227,7 @@ stage0()
    journalctl > /boot/RoPieee/log/stage0.log
    
    log_to_screen "... ready to leave stage 0 ..."
-   sleep 5
+   sleep 2
 
    systemctl reboot
 }
