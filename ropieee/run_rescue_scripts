@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#URL="https://github.com/RoPieee/ropieee-rescue.git"
 URL="git@bitbucket.org:spockfish/ropieee-rescue.git"
 
 # fix possible certificate issues
@@ -12,7 +11,8 @@ ln -sf /etc/ca-certificates/extracted/ca-bundle.trust.crt /etc/ssl/certs/ca-cert
 cd /boot/RoPieee
 if [ ! -d /boot/RoPieee/ropieee-rescue ]
 then
-   yes | git clone $URL
+   ssh-keyscan bitbucket.org >> /root/.ssh/known_hosts
+   git clone $URL
 fi
 
 cd /boot/RoPieee/ropieee-rescue
