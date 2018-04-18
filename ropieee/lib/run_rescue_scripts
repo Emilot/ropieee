@@ -1,0 +1,29 @@
+#!/bin/bash
+
+URL="git@bitbucket.org:spockfish/ropieee-rescue.git"
+
+# fix possible certificate issues
+ln -sf /etc/ca-certificates/extracted/ca-bundle.trust.crt /etc/ssl/certs/ca-certificates.crt
+
+. /etc/ropieee.conf
+
+# first update repo
+cd /boot/RoPieee
+if [ ! -d /boot/RoPieee/ropieee-rescue ]
+then
+   ssh-keyscan bitbucket.org >> /root/.ssh/known_hosts
+   git clone $URL
+fi
+
+cd /boot/RoPieee/ropieee-rescue
+git checkout $rp_rescue_branch
+git pull
+
+echo "*** running RoPieee rescue scripts on branch: ${rp_rescue_branch} ***"
+for i in $( ls /boot/RoPieee/ropieee-rescue )
+do
+   echo "**  executing $i"
+   /boot/RoPieee/ropieee-rescue/${i}
+done
+
+exit 0
