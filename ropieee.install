@@ -123,7 +123,7 @@ pre_upgrade()
 
    if [ $( grep -c rp_reboot_schedule /etc/ropieee.conf ) -eq 0 ]
    then
-      echo 'rp_rescue_schedule=daily' >> /etc/ropieee.conf
+      echo 'rp_reboot_schedule=daily' >> /etc/ropieee.conf
    fi
 
    if [ $( grep -c rp_arch_base /etc/ropieee.conf ) -eq 0 ]
