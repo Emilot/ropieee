@@ -194,6 +194,12 @@ config_wireless_network
 
 systemctl daemon-reload
 
+# is there OEM stuff?
+if [ -x /etc/ropieee_post_script && $rp_oem -eq 1 ]
+then
+   /etc/ropieee_post_script
+fi
+
 # ok here we go!
 if [ -n "$FILE" -a -z "$OPTION" ]
 then
