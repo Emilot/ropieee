@@ -47,6 +47,8 @@ rp_network_wired_gateway=unknown
 rp_network_wireless_enabled=0
 rp_network_wireless_essid=unknown
 rp_network_wireless_psk=unknown
+rp_raat_dop_enabled=0
+rp_raat_software_volume_enabled=0
 _EOF_
    fi
 
@@ -132,6 +134,16 @@ pre_upgrade()
    if [ $( grep -c rp_repo_url /etc/ropieee.conf ) -eq 0 ]
    then
       echo 'rp_repo_url=http://repo-__RP_REPO__.ropieee.org/' >> /etc/ropieee.conf
+   fi
+
+   if [ $( grep -c rp_raat_dop_enabled /etc/ropieee.conf ) -eq 0 ]
+   then
+      echo 'rp_raat_dop_enabled=0' >> /etc/ropieee.conf
+   fi
+
+   if [ $( grep -c rp_raat_software_volume_enabled /etc/ropieee.conf ) -eq 0 ]
+   then
+      echo 'rp_raat_software_volume_enabled=0' >> /etc/ropieee.conf
    fi
 }
 
