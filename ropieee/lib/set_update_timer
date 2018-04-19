@@ -12,7 +12,6 @@ then
    trigger_date=$( date '+%F %T' -d "+1 day" )
    cat << _EOF_ > /etc/systemd/system/ropieee-update.timer.d/ropieee-update-override.conf
 [Timer]
-OnBootSec=15min
 OnCalendar=${trigger_date}
 _EOF_
 elif [ "${rp_auto_update}" = "weekly" ]

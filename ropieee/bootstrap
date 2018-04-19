@@ -115,8 +115,9 @@ stage3()
 
    # set reboot schedule
    test "$rp_reboot_schedule" = "daily" && shutdown -r $rp_reboottime
-
-   if [ "${rp_auto_update}" = "on_boot" ]
+ 
+   # do we need to check for updates?
+   if [ "${rp_auto_update}" = "on_boot" -o "${rp_auto_update}" = "daily" ]
    then
       # run updates...
       /opt/RoPieee/sbin/run-updates
