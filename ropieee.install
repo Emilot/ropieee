@@ -26,6 +26,8 @@ post_install()
    then
       cat << _EOF_ > /etc/ropieee.conf
 rp_oem=${ropieee_oem}
+rp_oem_identifier=ropieee-ose
+rp_analytics_url=https://metrum-acoustics-200118.appspot.com
 rp_arch_base=201804_00
 rp_repo=${ropieee_repo}
 rp_repo_url=http://repo-__RP_REPO__.ropieee.org/
@@ -144,6 +146,11 @@ pre_upgrade()
    if [ $( grep -c rp_raat_software_volume_enabled /etc/ropieee.conf ) -eq 0 ]
    then
       echo 'rp_raat_software_volume_enabled=0' >> /etc/ropieee.conf
+   fi
+
+   if [ $( grep -c rp_oem_identifier /etc/ropieee.conf ) -eq 0 ]
+   then
+      echo 'rp_oem_identifier=ropieee-ose' >> /etc/ropieee.conf
    fi
 }
 
