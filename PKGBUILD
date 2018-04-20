@@ -1,8 +1,8 @@
 # Maintainer: Harry ten Berge <htenberge@gmail.com>
 
 pkgname=ropieee
-pkgver=20180419
-pkgrel=3
+pkgver=20180420
+pkgrel=1
 arch=(any)
 url="https://github.com/RoPieee/"
 license=('MIT')
@@ -43,6 +43,7 @@ echo "package"
    install -m0755 "../ropieee/configure"                                  "${pkgdir}/opt/RoPieee/sbin"
    install -m0755 "../ropieee/reboot"                                     "${pkgdir}/opt/RoPieee/sbin"
    install -m0755 "../ropieee/send-feedback"                              "${pkgdir}/opt/RoPieee/sbin"
+   install -m0755 "../ropieee/ping-analytics"                             "${pkgdir}/opt/RoPieee/sbin"
 
    install -m0755 "../ropieee/lib/disable_usb_audio"                      "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/enable_usb_audio"                       "${pkgdir}/opt/RoPieee/lib"
