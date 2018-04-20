@@ -1,0 +1,20 @@
+#!/bin/bash
+
+BACKEND_URL_PROD="https://metrum-acoustics-200118.appspot.com"
+
+# load config
+. /etc/ropieee.conf
+
+event="ping"
+test -n "$1" && event="$1"
+
+id=$( /opt/RoPieee/lib/get_uuid )
+oem=$rp_oem_identifier
+version=$( expr $( cat /etc/ropieee_version ) + 0 )
+data="{\"id\":\"${id}\",\"oem\":\"${oem}\",\"version\": ${version}, \"event\": \"${event}\"}"
+
+echo "Analytics report: $data"
+curl -v -H "Content-Type: application/json" -X POST -d "$data" $BACKEND_URL_PROD
+
+exit 0
+
