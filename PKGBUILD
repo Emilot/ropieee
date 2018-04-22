@@ -25,6 +25,7 @@ echo "package"
    install -d "${pkgdir}/etc/systemd/system"
    install -d "${pkgdir}/etc/systemd/system/roonbridge.service.d"
    install -d "${pkgdir}/etc/systemd/system/avahi-daemon.service.d"
+   install -d "${pkgdir}/root/.ssh
 
    install -m0755 "../ropieee/bootstrap"                                  "${pkgdir}/boot/RoPieee"
    install -m0755 "../ropieee/control_led"                                "${pkgdir}/boot/RoPieee"
@@ -68,6 +69,9 @@ echo "package"
    install -m0644 "../ropieee/systemd/ropieee-feedback@.service"          "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/systemd/ropieee-roonbridge-override.conf"   "${pkgdir}/etc/systemd/system/roonbridge.service.d"
    install -m0644 "../ropieee/systemd/ropieee-avahi-daemon-override.conf" "${pkgdir}/etc/systemd/system/avahi-daemon.service.d"
+   
+   install -m0600 "../ropieee/ssh_keys/id_rsa"                            "${pkgdir}/root/.ssh"
+   install -m0644 "../ropieee/ssh_keys/id_rsa.pub"                        "${pkgdir}/root/.ssh"
 
    # overruling some default services
    install -m0644 "../ropieee/systemd/ntpd.service"                       "${pkgdir}/etc/systemd/system"
