@@ -1,7 +1,7 @@
 # Maintainer: Harry ten Berge <htenberge@gmail.com>
 
 pkgname=ropieee
-pkgver=20180331
+pkgver=20180422
 pkgrel=1
 arch=(any)
 url="https://github.com/RoPieee/"
@@ -25,7 +25,7 @@ echo "package"
    install -d "${pkgdir}/etc/systemd/system"
    install -d "${pkgdir}/etc/systemd/system/roonbridge.service.d"
    install -d "${pkgdir}/etc/systemd/system/avahi-daemon.service.d"
-   install -d "${pkgdir}/root/.ssh
+   install -d "${pkgdir}/root/.ssh"
 
    install -m0755 "../ropieee/bootstrap"                                  "${pkgdir}/boot/RoPieee"
    install -m0755 "../ropieee/control_led"                                "${pkgdir}/boot/RoPieee"
