@@ -119,8 +119,12 @@ stage3()
    # do we need to check for updates?
    if [ "${rp_auto_update}" = "on_boot" -o "${rp_auto_update}" = "daily" ]
    then
-      # run updates...
-      /opt/RoPieee/sbin/run-updates
+      # run updates, if there's something out there...
+      log_to_screen "... Checking for updates ..."
+      if /opt/RoPieee/lib/check_for_updates
+      then
+         /opt/RoPieee/sbin/run-updates
+      fi
    fi
 
    log_to_screen "... We're ready. RoPieee is RUNNING ..."
