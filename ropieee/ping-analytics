@@ -14,7 +14,7 @@ version=$( expr $( cat /etc/ropieee_version ) + 0 )
 data="{\"id\":\"${id}\",\"oem\":\"${oem}\",\"version\": ${version}, \"event\": \"${event}\"}"
 
 echo "Analytics report: $data"
-curl -v -H "Content-Type: application/json" -X POST -d "$data" $BACKEND_URL_PROD
+curl -H "Content-Type: application/json" -X POST -d "$data" $BACKEND_URL_PROD
 
 exit 0
 
