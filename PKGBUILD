@@ -61,6 +61,7 @@ echo "package"
    install -m0755 "../ropieee/lib/get_country_code"                       "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/get_wifi_networks"                      "${pkgdir}/opt/RoPieee/lib"
    install -m0755 "../ropieee/lib/get_uuid"                               "${pkgdir}/opt/RoPieee/lib"
+   install -m0755 "../ropieee/lib/enable_readonly_fs"                     "${pkgdir}/opt/RoPieee/lib"
 
    install -m0644 "../ropieee/systemd/ropieee1-bootstrap.service"         "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/systemd/ropieee-update.service"             "${pkgdir}/etc/systemd/system"
