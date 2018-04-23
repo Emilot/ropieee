@@ -134,7 +134,7 @@ stage3()
    test $rp_oem -eq 1 && systemctl start ropieee-oem
 
    # report home
-   /opt/RoPieee/sbin/ping-analytics
+   /opt/RoPieee/sbin/ping-analytics on_boot
 
    # let's go to bed...
    while true
