@@ -104,6 +104,7 @@ stage3()
 
    # wait for NTP
    log_to_screen "... Waiting for NTP synchronization ..."
+   echo "... Waiting for NTP synchronization ..."
    wait_for_timesync
 
    # is there something that needs rescueing?
@@ -121,6 +122,7 @@ stage3()
    then
       # run updates, if there's something out there...
       log_to_screen "... Checking for updates ..."
+      echo "... Checking for updates ..."
       if /opt/RoPieee/lib/check_for_updates
       then
          /opt/RoPieee/sbin/run-updates
