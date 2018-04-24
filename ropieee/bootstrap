@@ -181,6 +181,9 @@ stage2()
       fi
    fi
 
+   # report home
+   /opt/RoPieee/sbin/ping-analytics on_install
+
    # enable the web interface
    systemctl enable ropieee-web
 
