@@ -1,0 +1,14 @@
+[Unit]
+Description=RoPieee Analytics
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c '/opt/RoPieee/sbin/ping-analytics'
+StandardOutput=journal+console
+SyslogIdentifier=ropieee-analytics
+
+[Install]
+WantedBy=multi-user.target
+

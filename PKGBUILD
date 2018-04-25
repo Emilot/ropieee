@@ -71,6 +71,8 @@ echo "package"
    install -m0644 "../ropieee/systemd/ropieee-feedback@.service"          "${pkgdir}/etc/systemd/system"
    install -m0644 "../ropieee/systemd/ropieee-roonbridge-override.conf"   "${pkgdir}/etc/systemd/system/roonbridge.service.d"
    install -m0644 "../ropieee/systemd/ropieee-avahi-daemon-override.conf" "${pkgdir}/etc/systemd/system/avahi-daemon.service.d"
+   install -m0644 "../ropieee/systemd/ropieee-analytics.service"          "${pkgdir}/etc/systemd/system"
+   install -m0644 "../ropieee/systemd/ropieee-analytics.timer"            "${pkgdir}/etc/systemd/system"
 
    # overruling some default services
    install -m0644 "../ropieee/systemd/ntpd.service"                       "${pkgdir}/etc/systemd/system"
