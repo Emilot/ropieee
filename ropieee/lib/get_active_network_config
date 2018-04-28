@@ -1,0 +1,78 @@
+#!/bin/bash
+
+parse_ip_address()
+{
+   set -- "$@"
+   echo "$2" | cut -d '/' -f 1
+}
+
+
+parse_ip_netmask()
+{
+   set -- "$@"
+   set -- $( ipcalc "$2" | grep Netmask )
+   echo $2
+}
+
+parse_ip_broadcast()
+{
+   set -- "$@"
+   echo "$4"
+}
+
+parse_default_gw()
+{
+   gw=$( ip route list default )
+   set -- $gw
+   echo "$3"
+}
+
+# first get eth0
+inet_eth0="$( ip address show dev eth0 2>/dev/null | grep 'inet ' )"
+inet_wlan0="$( ip address show dev wlan0 2>/dev/null | grep 'inet ' )"
+inet_test0="$( ip address show dev test0 2>/dev/null | grep 'inet ' )"
+
+interfaces=0
+test -n "$inet_eth0" && interfaces=$( expr $interfaces + 1)
+test -n "$inet_wlan0" && interfaces=$( expr $interfaces + 1)
+
+#parse_ip_address $inet_wlan0
+#parse_ip_netmask $inet_wlan0
+#parse_ip_broadcast $inet_wlan0
+#parse_default_gw
+
+if [ -n "$inet_eth0" ]
+then
+   cat << _EOF_
+{
+  "wired": {
+             "address": "$( parse_ip_address $inet_eth0 )",
+	     "netmask": "$( parse_ip_netmask $net_eth0 )",
+	     "broadcast": "$( parse_ip_broadcast $inet_eth0 )"
+           },
+_EOF_
+else
+   cat << _EOF_
+{
+_EOF_
+fi
+
+if [ -n "$inet_wlan0" ]
+then
+   cat << _EOF_
+  "wireless": {
+                 "address": "$( parse_ip_address $inet_wlan0 )",
+		 "netmask": "$( parse_ip_netmask $net_wlan0 )",
+		 "broadcast": "$( parse_ip_broadcast $inet_wlan0 )"
+              },
+_EOF_
+fi
+
+# print footer
+cat << _EOF_
+  "interfaces": $interfaces,
+  "default_gw": "$( parse_default_gw )"
+}
+_EOF_
+
+exit 0
